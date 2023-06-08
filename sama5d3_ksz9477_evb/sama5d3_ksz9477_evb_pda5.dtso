@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * at91-sama5d3_ksz9477_evb_pda7.dtso - Device Tree file for EVB-KSZ9477 TM7000
- * overlay blob for PDA TM7000 LCD screen.
+ * at91-sama5d3_xplained_pda5.dtso - Device Tree file for SAMA5D3 Xplained board
+ * overlay blob for PDA TM5000 LCD screen.
  *
- * Copyright (C) 2023 Microchip Technology, Inc.
- * Author: Joemel John Diente <JoemelJohn.Diente@microchip.com>
+ * Copyright (C) 2018 Microchip Technology, Inc.
+ * Author: Eugen Hristev <eugen.hristev@microchip.com>
  *
  */
 /dts-v1/;
@@ -25,9 +25,9 @@
 		wakeup-source;
 	};
 
-	atmel_mxt_ts@4c {
+	atmel_mxt_ts@4a {
 		compatible = "atmel,atmel_mxt_ts";
-		reg = <0x4c>;
+		reg = <0x4a>;
 		interrupt-parent = <&pioE>;
 		interrupts = <7 0x0>;
 		pinctrl-names = "default";
@@ -40,7 +40,7 @@
 
 	hlcdc-display-controller {
 		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_lcd_base &pinctrl_lcd_rgb666_alt>;
+		pinctrl-0 = <&pinctrl_lcd_base &pinctrl_lcd_rgb888_alt>;
 		port@0 {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -52,22 +52,8 @@
 	};
 };
 
-&pinctrl {
-	board {
-		pinctrl_qt1070_irq: pinctrl_qt1070_irq {
-			atmel,pins =
-				<AT91_PIOE 8 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;
-		};
-
-		pinctrl_mxt_irq: pinctrl_mxt_irq {
-			atmel,pins =
-				<AT91_PIOE 7 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;
-		};
-	};
-};
-
 &{/} {
-	model = "EVB-KSZ9477 Switch Evaluation Board with TM7000";
+	model = "EVB-KSZ9477 Switch Evaluation Board with TM5000";
 
 	backlight: backlight {
 		compatible = "pwm-backlight";
@@ -87,7 +73,7 @@
 	};
 
 	panel: panel {
-		compatible = "shelly,sca07010-bfn-lnn", "simple-panel";
+		compatible = "pda,91-00156-a0", "simple-panel";
 		backlight = <&backlight>;
 		power-supply = <&panel_reg>;
 		#address-cells = <1>;

@@ -180,14 +180,21 @@
 				board {
 					pinctrl_i2c0_pu: i2c0_pu {
 						atmel,pins =
-							<AT91_PIOA 30 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>,
-							<AT91_PIOA 31 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
+							<AT91_PIOA 30 AT91_PERIPH_A AT91_PINCTRL_NONE>,
+							<AT91_PIOA 31 AT91_PERIPH_A AT91_PINCTRL_NONE>;
+					};
+
+					pinctrl_i2c1_pu: i2c1_pu {			/* LCD Connector I2C */
+						atmel,pins =
+							<AT91_PIOC 27 AT91_PERIPH_B AT91_PINCTRL_NONE>,
+							<AT91_PIOC 26 AT91_PERIPH_B AT91_PINCTRL_NONE>;
+
 					};
 
 					pinctrl_i2c2_pu: i2c2_pu {			/* SFP I2C or ATECC */
 						atmel,pins =
-							<AT91_PIOA 18 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>,
-							<AT91_PIOA 19 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;
+							<AT91_PIOA 18 AT91_PERIPH_B AT91_PINCTRL_NONE>,
+							<AT91_PIOA 19 AT91_PERIPH_B AT91_PINCTRL_NONE>;
 					};
 
 					pinctrl_mmc0_cd: mmc0_cd {
@@ -217,6 +224,16 @@
 					pinctrl_ksz_irq: ksz_irq {
 						atmel,pins =
 							<AT91_PIOB 28 AT91_PERIPH_GPIO AT91_PINCTRL_DEGLITCH>;
+					};
+
+					pinctrl_qt1070_irq: pinctrl_qt1070_irq {
+						atmel,pins =
+							<AT91_PIOE 8 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;
+					};
+
+					pinctrl_mxt_irq: pinctrl_mxt_irq {
+						atmel,pins =
+							<AT91_PIOE 7 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;
 					};
 				};
 			};
