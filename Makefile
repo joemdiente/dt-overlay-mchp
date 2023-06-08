@@ -5,7 +5,7 @@ DTC_OPTIONS += -Wno-unit_address_vs_reg -Wno-graph_child_address -Wno-pwms_prope
 KERNEL_DIR?=../linux
 KERNEL_BUILD_DIR?=$(KERNEL_DIR)
 DTC?=$(KERNEL_BUILD_DIR)/scripts/dtc/dtc
-BDIR?=sam9x60ek sama5d27_som1_ek sama5d27_wlsom1_ek sama5d2_icp sama5d2_ptc_ek sama5d2_xplained sama5d2_xplained_grts sama5d3_xplained sama5d3_eds sama5d4_xplained sama7g5ek sam9x60_curiosity mpfs_icicle mpfs_icicle_amp
+BDIR?=sam9x60ek sama5d27_som1_ek sama5d27_wlsom1_ek sama5d2_icp sama5d2_ptc_ek sama5d2_xplained sama5d2_xplained_grts sama5d3_xplained sama5d3_eds sama5d3_ksz9477_evb sama5d4_xplained sama7g5ek sam9x60_curiosity mpfs_icicle mpfs_icicle_amp
 
 # workaround to make mkimage use the same dtc as we do
 PATH:=$(shell dirname $(DTC)):$(PATH)
@@ -23,6 +23,7 @@ SAMA5D2_XPLAINED_GRTS_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d2
 SAMA5D27_SOM1_EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d27_som1_ek/*.dtso))
 SAMA5D27_WLSOM1_EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d27_wlsom1_ek/*.dtso))
 SAMA5D3_EDS_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d3_eds/*.dtso))
+SAMA5D3_KSZ9477_EVB_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d3_ksz9477_evb/*.dtso))
 SAMA5D3_XPLAINED_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d3_xplained/*.dtso))
 SAMA5D4_XPLAINED_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d4_xplained/*.dtso))
 SAMA7G5EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama7g5ek/*.dtso))
@@ -61,6 +62,8 @@ sama5d27_som1_ek_dtbos: $(SAMA5D27_SOM1_EK_DTBO_OBJECTS)
 sama5d27_wlsom1_ek_dtbos: $(SAMA5D27_WLSOM1_EK_DTBO_OBJECTS)
 
 sama5d3_eds_dtbos: $(SAMA5D3_EDS_DTBO_OBJECTS)
+
+sama5d3_ksz9477_evb_dtbos: $(SAMA5D3_KSZ9477_EVB_DTBO_OBJECTS)
 
 sama5d3_xplained_dtbos: $(SAMA5D3_XPLAINED_DTBO_OBJECTS)
 
