@@ -1,0 +1,224 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sama5d3_ksz9477_evb.its - Flattened Image Tree file for EVB-KSZ9477
+ *
+ * Copyright (C) 2018 Microchip Technology, Inc.
+ * Author: Joemel John Diente <JoemelJohn.Diente@microchip.com>
+ *
+ */
+/dts-v1/;
+
+/ {
+	description = "Microchip EVB-KSZ9477 FIT Image";
+	#address-cells = <1>;
+
+	images {
+		kernel {
+			description = "Linux4SAM Linux kernel";
+			data = /incbin/("./zImage");
+			type = "kernel";
+			arch = "arm";
+			os = "linux";
+			compression = "none";
+			load = <0x22000000>;
+			entry = <0x22000000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		base_fdt {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("./at91-sama5d3_ksz9477_evb.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23000000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_pda4 {
+			description = "Device Tree blob pda4300 overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_pda4.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23120000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_pda5 {
+			description = "Device Tree blob pda5000 overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_pda5.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23120000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_pda7 {
+			description = "Device Tree blob pda7000 overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_pda7.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23120000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_pda7b {
+			description = "Device Tree blob pda7000b overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_pda7b.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23120000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_ksz9477_spi {
+			description = "Device Tree blob ksz9477 SPI overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_ksz9477_spi.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23130000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_ksz9477_i2c {
+			description = "Device Tree blob ksz9477 I2C overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_ksz9477_i2c.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23130000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_rgmii_irq {
+			description = "Device Tree blob generic RGMII PHY overlay w/ IRQ";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_rgmii_irq.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23130000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_rgmii {
+			description = "Device Tree blob generic RGMII PHY overlay";
+			data = /incbin/("./sama5d3_ksz9477_evb/sama5d3_ksz9477_evb_rgmii.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23130000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+	};
+
+	configurations {
+		default = "kernel_dtb";
+
+		kernel_dtb {
+			description = "Linux kernel and base FDT blob for EVB-KSZ9477 board";
+			kernel = "kernel";
+			fdt = "base_fdt";
+		};
+
+		base_dtb {
+			description = "FDT blob for base EVB-KSZ9477 board";
+			fdt = "base_fdt";
+		};
+
+		pda4 {
+			description = "FDT overlay blob for PDA TM4300 screen";
+			fdt = "fdt_pda4";
+		};
+
+		pda5 {
+			description = "FDT overlay blob for PDA TM5000 screen";
+			fdt = "fdt_pda5";
+		};
+
+		pda7 {
+			description = "FDT overlay blob for PDA TM7000 screen";
+			fdt = "fdt_pda7";
+		};
+
+		pda7b {
+			description = "FDT overlay blob for PDA TM7000B screen";
+			fdt = "fdt_pda7b";
+		};
+
+		ksz9477_spi {
+			description = "FDT overlay blob for KSZ9477 SPI";
+			fdt = "fdt_ksz9477_spi";
+		};
+
+		ksz9477_i2c {
+			description = "FDT overlay blob for ksz9477 I2C";
+			fdt = "fdt_ksz9477_i2c";
+		};
+
+		rgmii_irq {
+			description = "FDT overlay blob for generic RGMII PHY add-on board";
+			fdt = "fdt_rgmii_irq";
+		};
+
+		rgmii {
+			description = "FDT overlay blob for generic RGMII PHY add-on board";
+			fdt = "fdt_rgmii";
+		};
+	};
+};
