@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sama5d3_eds_iocon_spidev.dtso - Device Tree file for SAMA5D3 EDS board
+ * overlay blob for enabling SPIDEV in IO Connector #1 board.
+ *
+ * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries
+ *
+ * Author: Joemel John A. Diente <rakesh.sankaranarayanan@microchip.com>
+ *
+ * I/O Connector #1 - MPU
+ * Pin 9  - PC22_SPI1_MISO
+ * Pin 11 - PC23_SPI1_MOSI
+ * Pin 13 - PC24_SPI1_SPCK
+ * Pin 15 - PC25_SPI1_NPCS0
+ */
+/dts-v1/;
+/plugin/;
+
+#include "dt-bindings/gpio/gpio.h"
+#include "dt-bindings/interrupt-controller/irq.h"
+#include "dt-bindings/pinctrl/at91.h"
+
+
+&spi1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	spidev@0 {
+		reg = <0>;
+		compatible = "atmel,at91rm9200-spidev";
+		spi-max-frequency = <30000000>;
+		status = "okay";
+	};
+};
+
+&{/} {
+	model = "SAMA5D3-EDS: SPIDEV Enabled on IO Connector#1";
+};
