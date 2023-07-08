@@ -1,3 +1,4 @@
 *.pre.dtso
 *.dtbo
 *.itb
+.vscode-ctags
