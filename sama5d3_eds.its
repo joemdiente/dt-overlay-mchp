@@ -274,6 +274,22 @@
 				algo = "sha1";
 			};
 		};
+		fdt_vsc8531_emac {
+			description = "Device Tree blob for vsc8541/vsc8531 evaluation board in emac";
+			data = /incbin/("./sama5d3_eds/sama5d3_eds_vsc8531_emac.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23150000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+
 	};
 
 	configurations {
@@ -363,6 +379,10 @@
 			description = "FDT overlay blob for for WILC SPI devices";
 			fdt = "fdt_iocon1_wilc";
 		};
-		
+
+		vsc8531_emac {
+			description = "FDT overlay blob for for vsc8541 PHY in EMAC devices";
+			fdt = "fdt_vsc8531_emac";
+		};	
 	};
 };
