@@ -41,21 +41,21 @@
 	status = "disabled"; /* conflict on PC30. */
 };
 
-&spi1 {
+&spi1 {													//WILC1000-SD is wired to SPI1
 	#address-cells = <1>;
 	#size-cells = <0>;
-	/delete-property/ dma-names;
+	/delete-property/ dma-names;								
 	/delete-property/ dmas;
-	status = "okay";
+	status = "okay";  									//Ensure that SPI status is set to okay
 
 	wilc_spi: wilc_spi@0 {
 		compatible = "microchip,wilc1000", "microchip,wilc3000";
-		spi-max-frequency = <30000000>;
+		spi-max-frequency = <40000000>;					//Maximum Frequency wilc1000 is 48MHz, set as equal or lower than max frequency
 		reg = <0>;
-		interrupt-parent = <&pioC>;
-		interrupts = <20 0>;
-		chip_en-gpios = <&pioC 18 GPIO_ACTIVE_HIGH>;
-		reset-gpios = <&pioC 19 GPIO_ACTIVE_LOW>;
+		interrupt-parent = <&pioC>;						//Point to the GPIO line where Host_Interrupt Pin is connected
+		interrupts = <20 IRQ_TYPE_LEVEL_LOW>;			//20 is pin number; IRQ_TYPE_LEVEL_LOW is Active Low (IRQ_N)
+		chip_en-gpios = <&pioC 18 GPIO_ACTIVE_HIGH>;	//Point to GPIO line and pin number of CHIP_EN; Always Active High
+		reset-gpios = <&pioC 19 GPIO_ACTIVE_LOW>;		//Point to GPIO line and pin number of RESET_N; Always Active Low
 		status = "okay";
 	};
 };
