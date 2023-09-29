@@ -24,6 +24,8 @@
 &spi1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
+	/delete-property/ dma-names;								
+	/delete-property/ dmas;
 	status = "okay";
 
 	spidev@0 {
