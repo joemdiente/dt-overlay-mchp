@@ -44,8 +44,8 @@
 &spi1 {													//WILC1000-SD is wired to SPI1
 	#address-cells = <1>;
 	#size-cells = <0>;
-	/delete-property/ dma-names;								
-	/delete-property/ dmas;
+	/delete-property/ dma-names;						//Not Working: /delete-property/						
+	/delete-property/ dmas;								//Comment out these properties in sama5d3.dtsi
 	status = "okay";  									//Ensure that SPI status is set to okay
 
 	wilc_spi: wilc_spi@0 {

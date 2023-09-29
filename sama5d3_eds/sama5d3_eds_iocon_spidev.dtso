@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries
  *
- * Author: Joemel John A. Diente <rakesh.sankaranarayanan@microchip.com>
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
  *
  * I/O Connector #1 - MPU
  * Pin 9  - PC22_SPI1_MISO
@@ -24,8 +24,8 @@
 &spi1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	/delete-property/ dma-names;								
-	/delete-property/ dmas;
+	/delete-property/ dma-names;		//Not Working: /delete-property/						
+	/delete-property/ dmas;				//Comment out these properties in sama5d3.dtsi
 	status = "okay";
 
 	spidev@0 {
