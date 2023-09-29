@@ -43,7 +43,7 @@
 			txd3-skew-psec = <0>;
 			txc-skew-psec = <1000>;
 			/* LAN8841  */
-			rxc-skew-psec = <800>;
+			rxc-skew-psec = <1000>;
 			resetb-gpios = <&pioD 18 GPIO_ACTIVE_LOW>;
 			interrupt-parent = <&pioB>;
 			interrupts = <28 IRQ_TYPE_EDGE_FALLING>;
