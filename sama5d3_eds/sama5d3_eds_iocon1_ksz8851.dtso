@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sama5d3_eds_iocon1_ksz8851.dtso - Device Tree file for SAMA5D3 EDS
+ * board overlay blob for KSZ8851SNL devices. (IO Connector#1)
+ *
+ * Copyright (C) 2024 Microchip Technology, Inc.
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * Status: Working
+ */
+
+/dts-v1/;
+/plugin/;
+
+/*
+ * I/O Connector #1 - MPU
+ * 1st Column
+ * Pin 1  - 5V 
+ * Pin 3  - PA30_TWD0_URXD1
+ * Pin 5  - PA31_TWCK0_UTXD1
+ * Pin 7  - Ground
+ * Pin 9  - PC22_SPI1_MISO 	(Used)
+ * Pin 11 - PC23_SPI1_MOSI 	(Used)
+ * Pin 13 - PC24_SPI1_SPCK 	(Used)
+ * Pin 15 - PC25_SPI1_NPCS0 (Used)
+ * 2nd Column
+ * Pin 2  - 3.3V 			(Used)
+ * Pin 4  - PC16_TK0_AUDIO
+ * Pin 6  - PC17_TF0_AUDIO
+ * Pin 8  - PC18_TD0_AUDIO 
+ * Pin 10 - PC19_RK0_AUDIO 
+ * Pin 12 - PC20_RF0_AUDIO 	(Host Interrupt)
+ * Pin 14 - PC21_RD0_AUDIO
+ * Pin 16 - Ground		   	(Used)
+ */
+
+#include "dt-bindings/pinctrl/at91.h"
+#include "dt-bindings/gpio/gpio.h"
+#include "dt-bindings/interrupt-controller/irq.h"
+
+&adc0 {
+	status = "disabled"; /* conflict on PC30. */
+};
+
+&spi1 {													
+	#address-cells = <1>;
+	#size-cells = <0>;
+	/delete-property/ dma-names;						//Not Working: /delete-property/						
+	/delete-property/ dmas;								//Comment out these properties in sama5d3.dtsi
+	status = "okay";  									//Ensure that SPI status is set to okay
+
+	ksz8851: ks8851@0 {
+		compatible = "micrel,ks8851";
+		spi-max-frequency = <40000000>;					//Maximum Frequency wilc1000 is 48MHz, set as equal or lower than max frequency
+		reg = <0>;
+		interrupt-parent = <&pioC>;						//Point to the GPIO line where Host_Interrupt Pin is connected
+		interrupts = <20 IRQ_TYPE_LEVEL_LOW>;			//20 is pin number; IRQ_TYPE_LEVEL_LOW is Active Low (IRQ_N)
+		status = "okay";
+	};
+};
+
+//Disable SSC0 Pins Conflicts with CHIP_EN, RESET_EN and Host INT and WAKE
+&ssc0 {
+	status = "disabled";
+};
+
+&pinctrl {
+	/delete-node/ ssc0;
+};
+
+
+
