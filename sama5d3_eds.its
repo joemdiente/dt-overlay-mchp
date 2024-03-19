@@ -318,8 +318,7 @@
 				algo = "sha1";
 			};
 		};
-		fdt_iocon1_ksz8851
-		{
+		fdt_iocon1_ksz8851 {
 			description = "Device Tree blob for EVB-KSZ8851SNL in IOCON1";
 			data = /incbin/("./sama5d3_eds/sama5d3_eds_iocon1_ksz8851.dtbo");
 			type = "flat_dt";
