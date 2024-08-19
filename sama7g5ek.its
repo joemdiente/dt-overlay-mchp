@@ -165,6 +165,21 @@
 			};
 		};
 
+		fdt_lan9668 {
+			description = "Device Tree blob EVB-LAN9668 Target Property overlay";
+			data = /incbin/("./sama7g5ek/meba_lan966x_8290_0.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x62000000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+		 
 		fdt_spi11_spidev {
 			description = "Device Tree blob SPIDEV on Mikrobus 1 overlay";
 			data = /incbin/("./sama7g5ek/sama7g5ek_spi11_spidev.dtbo");
@@ -228,6 +243,11 @@
 		flx0_spi {
 			description = "FDT overlay blob for FLEXCOMM0 SPI";
 			fdt = "fdt_flx0_spi";
+		};
+		
+		lan9668 {
+			description = "FDT overlay blob for EVB-LAN9668 target property";
+			fdt = "fdt_lan9668";
 		};
 
 		spi0_spidev {
