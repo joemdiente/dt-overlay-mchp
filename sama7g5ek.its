@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * sama7g5ek.its - Flattened Image Tree file for SAMA7G5-EK board
+ * Flattened Image Tree file for SAMA7G5-EK board
  *
  * Copyright (C) 2020 Microchip Technology Inc. and its subsidiaries
  *
@@ -150,9 +150,9 @@
 			};
 		};
 
-		fdt_spi0_spidev {
-			description = "Device Tree blob SPIDEV on Flexcomm0 SPI overlay";
-			data = /incbin/("./sama7g5ek/sama7g5ek_spi0_spidev.dtbo");
+		fdt_spi_click1 {
+			description = "Device Tree blob at25ff321a spi flash clickboard overlay";
+			data = /incbin/("./sama7g5ek/sama7g5ek_at25ff321a_click1.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -165,13 +165,13 @@
 			};
 		};
 
-		fdt_lan9668 {
-			description = "Device Tree blob EVB-LAN9668 Target Property overlay";
-			data = /incbin/("./sama7g5ek/meba_lan966x_8290_0.dtbo");
+		fdt_spi0_spidev {
+			description = "Device Tree blob SPIDEV on Flexcomm0 SPI overlay";
+			data = /incbin/("./sama7g5ek/sama7g5ek_spi0_spidev.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x62000000>;
+			load = <0x61900000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -186,7 +186,22 @@
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x61900000>;
+			load = <0x62000000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_lan9668 {
+			description = "Device Tree blob EVB-LAN9668 Target Property overlay";
+			data = /incbin/("./sama7g5ek/meba_lan966x_8290_0.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x62100000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -258,6 +273,11 @@
 		spi11_spidev {
 			description = "FDT overlay blob for SPIDEV on Mikrobus 1";
 			fdt = "fdt_spi11_spidev";
+		};
+
+		spi_click1 {
+			description = "FDT overlay blob for at25ff321a spi flash clickboard";
+			fdt = "fdt_spi_click1";
 		};
 	};
 };

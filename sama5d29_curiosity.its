@@ -105,9 +105,9 @@
 			};
 		};
 
-		fdt_lan8720a {
-			description = "Device Tree blob LAN8720A overlay";
-			data = /incbin/("./sama5d29_curiosity/sama5d29_curiosity_lan8720a.dtbo");
+		fdt_ksz8091 {
+			description = "Device Tree blob KSZ8091 overlay";
+			data = /incbin/("./sama5d29_curiosity/sama5d29_curiosity_ksz8091.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -127,6 +127,21 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x23150000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_spi_click1 {
+			description = "Device Tree blob at25ff321a spi flash clickboard overlay";
+			data = /incbin/("./sama5d29_curiosity/sama5d29_curiosity_at25ff321a_click1.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23160000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -170,14 +185,19 @@
 			fdt = "fdt_pda7b";
 		};
 
-		lan8720a {
-			description = "FDT overlay blob for LAN8720A RMII adapter AC320004-3";
-			fdt = "fdt_lan8720a";
+		ksz8091 {
+			description = "FDT overlay blob for KSZ8091 RMII adapter EV90J04A";
+			fdt = "fdt_ksz8091";
 		};
 
 		i2s0_proto {
 			description = "FDT overlay blob for mikroe Audio Proto board";
 			fdt = "fdt_i2s0_proto";
+		};
+
+		spi_click1 {
+			description = "FDT overlay blob for at25ff321a spi flash clickboard (1)";
+			fdt = "fdt_spi_click1";
 		};
 	};
 };

@@ -22,6 +22,8 @@ declare -A DTSO_DIR_TO_CFG=(							\
 	["mpfs_icicle"]="defconfig"						\
 	["mpfs_icicle_amp"]="defconfig"
 	["sam9x60ek"]="at91_dt_defconfig"					\
+	["sam9x75eb"]="at91_dt_defconfig"					\
+	["sam9x75_curiosity"]="at91_dt_defconfig"				\
 	["sama5d2_icp"]="sama5_defconfig"					\
 	["sama5d2_ptc_ek"]="sama5_defconfig"					\
 	["sama5d2_xplained"]="sama5_defconfig"					\
@@ -33,6 +35,7 @@ declare -A DTSO_DIR_TO_CFG=(							\
 	["sama5d3_xplained"]="sama5_defconfig"					\
 	["sama5d4_xplained"]="sama5_defconfig"					\
 	["sama7g5ek"]="sama7_defconfig"						\
+	["sama7g54_curiosity"]="sama7_defconfig"				\
 			);
 
 # Variable to hold the link between DTSO directory and its related devicetree
@@ -40,6 +43,8 @@ declare -A DTSO_DIR_TO_DT=(							\
 	["mpfs_icicle"]="microchip/mpfs-icicle-kit.dt"				\
 	["mpfs_icicle_amp"]="microchip/mpfs-icicle-kit-context-a.dt"		\
 	["sam9x60ek"]="at91-sam9x60ek.dt"					\
+	["sam9x75eb"]="at91-sam9x75eb.dt"					\
+	["sam9x75_curiosity"]="at91-sam9x75_curiosity.dt"			\
 	["sama5d2_icp"]="at91-sama5d2_icp.dt"					\
 	["sama5d2_ptc_ek"]="at91-sama5d2_ptc_ek.dt"				\
 	["sama5d2_xplained"]="at91-sama5d2_xplained.dt"				\
@@ -51,6 +56,7 @@ declare -A DTSO_DIR_TO_DT=(							\
 	["sama5d3_xplained"]="at91-sama5d3_xplained.dt"				\
 	["sama5d4_xplained"]="at91-sama5d4_xplained.dt"				\
 	["sama7g5ek"]="at91-sama7g5ek.dt"					\
+	["sama7g54_curiosity"]="at91-sama7g54_curiosity.dt"			\
 			);
 
 print_options() {
