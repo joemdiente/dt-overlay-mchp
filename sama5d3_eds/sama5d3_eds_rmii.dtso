@@ -25,8 +25,9 @@
 		#size-cells = <0>;
 
 		mbitphy: ethernet-phy@0 {
-			compatible = "ethernet-phy-ieee802.3-c22";
-			reg = <0x3>;
+			/* LAN8740 */
+			compatible = "ethernet-phy-id0007.c110";
+			reg = <0x0>; 
 			max-speed = <100>;
 			status = "okay";
 		};
