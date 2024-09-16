@@ -35,5 +35,5 @@
 };
 
 &{/} {
-	model = "SAMA5D3-EDS: Generic RMII PHY";
+	model = "SAMA5D3-EDS: LAN8740 PHY Daughterboard";
 };
