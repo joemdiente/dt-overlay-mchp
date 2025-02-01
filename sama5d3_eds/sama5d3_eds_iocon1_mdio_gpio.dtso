@@ -7,9 +7,6 @@
  * Status: In-progress
  */
 
- /dts-v1/;
- /plugin/;
- 
  /*
   * I/O Connector #1 - MPU
   * 1st Column
@@ -32,52 +29,76 @@
   * Pin 16 - Ground		   	(Used)
   */
 
+/dts-v1/;
+/plugin/;
+
 #include "dt-bindings/pinctrl/at91.h"
 #include "dt-bindings/gpio/gpio.h"
 #include "dt-bindings/interrupt-controller/irq.h"
 
-/dts-v1/;
-/plugin/;
-
 / {
-	fragment@0 {
+
+    fragment@0 {
 		target-path = "/";
 		__overlay__ {
+
+            /* MDIO 2 */
 			mdio2: mdio2 {
 				compatible = "virtual,mdio-gpio";
 				#address-cells = <1>;
 				#size-cells = <0>;
 				gpios = <&pioC 17 GPIO_ACTIVE_HIGH>, <&pioC 16 GPIO_ACTIVE_HIGH>; //MDC, MDIO
 				/* https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt */
+			}; 
+            
+            /* MDIO 3 */
+            mdio3: mdio3 {
+				compatible = "virtual,mdio-gpio";
+				#address-cells = <1>;
+				#size-cells = <0>;
+				gpios = <&pioC 19 GPIO_ACTIVE_HIGH>, <&pioC 18 GPIO_ACTIVE_HIGH>; //MDC, MDIO
+				/* https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt */
 			};
+            
+            aliases {
+                mdio-gpio2 = "/mdio2";
+                mdio-gpio3 = "/mdio3";
+            };                  
 		};
 	};
 
 	fragment@1 {
-		target = <&aliases>;
+		target = <&pinctrl>;
 		__overlay__ {
-				mdio-gpio2 = "/mdio2";
+            board {
+                /* MDIO 2 */
+                mdio-gpio2-mdio {
+                    atmel,pins =
+                        <AT91_PIOC 16 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+                    label = "mdio-gpio2-mdio";
+                };
+
+                mdio-gpio2-mdc {
+                    atmel,pins =
+                        <AT91_PIOC 17 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+                    label = "mdio-gpio2-mdc";
+                };
+
+                /* MDIO 3 */
+                mdio-gpio3-mdio {
+                    atmel,pins =
+                        <AT91_PIOC 18 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+                    label = "mdio-gpio3-mdio";
+                };
+
+                mdio-gpio3-mdc {
+                    atmel,pins =
+                        <AT91_PIOC 19 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+                    label = "mdio-gpio3-mdc";
+                };
+            };
 		};
 	};
-
-	fragment@2 {
-		target = <&board>;
-		__overlay__ {
-            mdio-gpio2-mdio {
-                atmel,pins =
-                    <AT91_PIOC 16 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-                label = "mdio-gpio2-mdio";
-            };
-
-            mdio-gpio2-mdc {
-                atmel,pins =
-                    <AT91_PIOC 17 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-                label = "mdio-gpio2-mdc";
-            };
-
-		};
-	};
-
 };
 
 
