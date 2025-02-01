@@ -281,7 +281,7 @@
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x23130000>;
+			load = <0x23140000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -304,13 +304,14 @@
 				algo = "sha1";
 			};
 		};
+
 		fdt_vsc8531_emac {
 			description = "Device Tree blob for vsc8541/vsc8531 evaluation board in emac";
 			data = /incbin/("./sama5d3_eds/sama5d3_eds_vsc8531_emac.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x23150000>;
+			load = <0x23143000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -318,13 +319,14 @@
 				algo = "sha1";
 			};
 		};
+
 		fdt_iocon1_ksz8851 {
-			description = "Device Tree blob for EVB-KSZ8851SNL in IOCON1";
+			description = "Device Tree blob for ksz8851 on iocon1 connector";
 			data = /incbin/("./sama5d3_eds/sama5d3_eds_iocon1_ksz8851.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x23160000>;
+			load = <0x23147000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -332,23 +334,19 @@
 				algo = "sha1";
 			};
 		};
-		
-		fdt_iocon1_93xx46 {
-			description = "Device Tree blob for 93xx46/56/66 EEPROM in IOCON1";
-			data = /incbin/("./sama5d3_eds/sama5d3_eds_iocon1_93xx46.dtbo");
+		fdt_iocon1_mdio {
+			description = "Device Tree blob for ksz8851 on iocon1 connector";
+			data = /incbin/("./sama5d3_eds/sama5d3_eds_iocon1_.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x23165000>;
+			load = <0x23152000>;
 			hash-1 {
 				algo = "crc32";
 			};
 			hash-2 {
 				algo = "sha1";
 			};
-		};
-
-
 	};
 
 	configurations {
@@ -453,15 +451,15 @@
 			description = "FDT overlay blob for for vsc8541 PHY in EMAC devices";
 			fdt = "fdt_vsc8531_emac";
 		};	
-	
+		
 		iocon1_ksz8851 {
-			description = "FDT overlay blob for for KSZ8851SNL";
+			description = "FDT overlay blob for for IOCON1 KSZ8851";
 			fdt = "fdt_iocon1_ksz8851";
 		};	
 
-		iocon1_93xx46 {
-			description = "FDT overlay blob for for 93xx46/56/66 EEPROM";
-			fdt = "fdt_iocon1_93xx46";
+		iocon1_mdio_gpio {
+			description = "FDT overlay blob for for IOCON1 mdio-gpio";
+			fdt = "fdt_iocon1_mdio";
 		};	
 	};
 };
