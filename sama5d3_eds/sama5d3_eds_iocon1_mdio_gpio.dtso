@@ -4,16 +4,16 @@
  *
  * Copyright (C) 2024 Microchip Technology, Inc.
  * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
- * Status: In-progress
+ * Status: Working
  */
 
  /*
-  * I/O Connector #1 - MPU
+  * I/O Connector #1 - MPU Pinout
   * 1st Column
   * Pin 1  - 5V 
   * Pin 3  - PA30_TWD0_URXD1
   * Pin 5  - PA31_TWCK0_UTXD1
-  * Pin 7  - Ground
+  * Pin 7  - Ground		   	(Used)
   * Pin 9  - PC22_SPI1_MISO
   * Pin 11 - PC23_SPI1_MOSI 	
   * Pin 13 - PC24_SPI1_SPCK 
