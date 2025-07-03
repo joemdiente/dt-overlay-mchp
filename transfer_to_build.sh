@@ -11,3 +11,5 @@ sudo rsync -avrP ./* $BUILD_DT_OVERLAY_DIR
 echo "[Transfer Script] ....Done...."
 export BUILD_DT_OVERLAY_DIR=$BUILD_DT_OVERLAY_DIR
 # ls -lh $BUILD_DT_OVERLAY_DIR/sama5d3_eds | grep .dtbo
+
+sudo ln -s ~/linux4microchip/dt-overlay-mchp/* ~/linux4microchip/buildroot-mchp/eds_sama5d3/build/dt-overlay-mchp-linux4microchip-2024.10

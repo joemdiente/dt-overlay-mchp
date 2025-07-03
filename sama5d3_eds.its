@@ -275,6 +275,7 @@
 				algo = "sha1";
 			};
 		};
+		
 		fdt_spi1_spidev {
 			description = "Device Tree blob for SPIDEV in SPI1 IO Connector 1";
 			data = /incbin/("./sama5d3_eds/sama5d3_eds_iocon_spidev.dtbo");
@@ -342,6 +343,21 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x23152000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_rmii_c22 {
+			description = "Device Tree blob for Clause 22 PHY in RMII";
+			data = /incbin/("./sama5d3_eds/sama5d3_eds_rmii_c22.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23153000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -463,5 +479,10 @@
 			description = "FDT overlay blob for for IOCON1 mdio gpio";
 			fdt = "fdt_iocon1_mdio_gpio";
 		};	
+
+		rmii_c22 {
+			description = "FDT overlay blob for for Clause 22 PHY in RMII";
+			fdt = "fdt_rmii_c22";
+		};
 	};
 };
