@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2026 Microchip Technology, Inc.
  * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
- * Status: To Verify
+ * Status: Working
  * 
  * Note: Make sure to add the following on ./linux/drivers/spi/spidev.c:
  *
@@ -75,8 +75,8 @@
 	pinctrl-0 = <&pinctrl_spi4_cs0_default>;
 	status = "okay";
 
-	spidev@0 {
-		reg = <0>;
+	spidev@1 {
+		reg = <1>;
 		compatible = "atmel,at91rm9200-spidev";
 		spi-max-frequency = <30000000>;
 		status = "okay";
