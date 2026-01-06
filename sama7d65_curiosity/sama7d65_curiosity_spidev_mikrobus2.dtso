@@ -1,0 +1,101 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sama7d65_curiosity_spidev_mikrobus1.dtso - Device Tree file for SAMA7D65 Curiosity Kit
+ * board overlay for MikroBus 2 SPIDEV
+ *
+ * Copyright (C) 2026 Microchip Technology, Inc.
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * Status: To Verify
+ * 
+ * Note: Make sure to add the following on ./linux/drivers/spi/spidev.c:
+ *
+ *  static const struct spi_device_id spidev_spi_ids[] = {
+ *  .........
+ *    { .name = at91rm9200-spidev },
+ *  	{},
+ *  };
+ *
+ *  AND 
+ *  static const struct of_device_id spidev_dt_ids[] = {
+ *  .........
+ *    { .compatible = "atmel,at91rm9200-spidev", .data = &spidev_of_check },
+ *	  {},
+ *  };
+ *
+ * Then rebuild linux.
+ */
+ 
+ /* 
+  * J25 MikroBus 1 Pinout
+  * AN - AD2 - MBUS1_AN_PC5
+  * RST - nRST_MBUS
+  * CS - FLEXCOM4_IO3 - MBUS1_SPI_CS_PA15
+  * SCK - FLEXCOM4_IO2 - MBUS1_SPI_SCK_PA16
+  * MISO - FLEXCOM4_IO1 - MBUS1_SPI_MISO_PA17
+  * MOSI - FLEXCOM4_IO0 - MBUS1_SPI_MOSI_PA18
+  * ====
+  * PWM - PMWL0 - MBUS1_PWM_PB15
+  * INT - ADTRG - MBUS1_INT_PB7  (Pull-up 110k)
+  * RX - FLEXCOM7_IO1 - MBUS1_RX/CAN0_RX_PD9
+  * TX - FLEXCOM7_IO0 - MBUS1_TX/CAN0_TX_PD8
+  * SCL - FLEXCOM0_IO1 - MBUS1_TWCK_PC6
+  * SDA - FLEXCOM0_IO0 - MBUS1_TWD_PC7
+  *
+  * J26 MikroBus 2 Pinout
+  * AN - AD8 - MBUS1_AN_PC13
+  * RST - nRST_MBUS
+  * CS - FLEXCOM4_IO4 - MBUS2_SPI_CS_PA14
+  * SCK - FLEXCOM4_IO2 - MBUS2_SPI_SCK_PA16
+  * MISO - FLEXCOM4_IO1 - MBUS2_SPI_MISO_PA17
+  * MOSI - FLEXCOM4_IO0 - MBUS2_SPI_MOSI_PA18
+  * ====
+  * PWM - PMWL1 - MBUS2_PWM_PB17
+  * INT -  - MBUS2_INT_PA22 (Pull-up 110k)
+  * RX - FLEXCOM5_IO1 - MBUS2_RX/CAN4_RX_PD17
+  * TX - FLEXCOM5_IO0 - MBUS2_TX/CAN4_TX_PD16
+  * SCL - FLEXCOM0_IO1 - MBUS2_TWCK_PC6
+  * SDA - FLEXCOM0_IO0 - MBUS2_TWD_PC7
+  */
+
+/dts-v1/;
+/plugin/;
+#include "sama7d65-pinfunc.h"
+#include <dt-bindings/mfd/atmel-flexcom.h>
+#include <dt-bindings/pinctrl/at91.h>
+
+&flx4 {
+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
+	status = "okay";
+};
+
+&spi4 {													
+	#address-cells = <1>;
+	#size-cells = <0>;
+  pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_spi4_cs1_default>;
+	status = "okay";
+
+	spidev@1 {
+		reg = <1>;
+		compatible = "atmel,at91rm9200-spidev";
+		spi-max-frequency = <30000000>;
+		status = "okay";
+	};
+};
+
+&pioa {
+  pinctrl_spi4_cs1_default: spi4-cs1-default {
+		pinmux = <PIN_PA18__FLEXCOM4_IO0>,	/* MOSI */
+			 <PIN_PA17__FLEXCOM4_IO1>,	/* MISO */
+			 <PIN_PA16__FLEXCOM4_IO2>,	/* SPCK */
+			 <PIN_PA14__FLEXCOM4_IO4>;	/* CS0 */
+    bias-disable;
+  };
+};
+
+&{/} {
+	model = "SAMA7D65 Curiosity Kit MikroBUS 1 SPIDEV";
+};
+ 
+ 
+ 

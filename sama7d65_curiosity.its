@@ -276,7 +276,37 @@
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x61700000>;
+			load = <0x61730000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_spidev_mikrobus1 {
+			description = "Device Tree blob for MikroBus 1 SPIDEV board overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_spidev_mikrobus1.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61750000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_spidev_mikrobus2 {
+			description = "Device Tree blob for MikroBus 2 SPIDEV board overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_spidev_mikrobus2.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61760000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -383,6 +413,16 @@
 		i2s1_wm8731 {
 			description = "FDT overlay blob with WM8731 Mikroe PROTO codec";
 			fdt = "fdt_wm8731_proto";
+		};
+
+		spidev_mikrobus1 {
+			description = "FDT overlay blob with MikroBus 1 SPIDEV";
+			fdt = "fdt_spidev_mikrobus1";
+		};
+
+		spidev_mikrobus2 {
+			description = "FDT overlay blob with MikroBus 2 SPIDEV";
+			fdt = "fdt_spidev_mikrobus2";
 		};
 	};
 };
