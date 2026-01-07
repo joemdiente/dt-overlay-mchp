@@ -299,10 +299,25 @@
 				algo = "sha1";
 			};
 		};
-
+/*
 		fdt_spidev_mikrobus2 {
 			description = "Device Tree blob for MikroBus 2 SPIDEV board overlay";
 			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_spidev_mikrobus2.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61760000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+*/
+		fdt_mdio_gpio_mikrobus2{
+			description = "Device Tree blob for MDIO Bitbang using GPIO Mikrobus 2 board overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_mdio_gpio_mikrobus2.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -419,10 +434,15 @@
 			description = "FDT overlay blob with MikroBus 1 SPIDEV";
 			fdt = "fdt_spidev_mikrobus1";
 		};
-
+/*
 		spidev_mikrobus2 {
 			description = "FDT overlay blob with MikroBus 2 SPIDEV";
 			fdt = "fdt_spidev_mikrobus2";
+		};
+*/
+		mdio_gpio_mikrobus2 {
+			description = "FDT overlay blob with MDIO Bitbang using GPIO Mikrobus 2";
+			fdt = "fdt_mdio_gpio_mikrobus2";
 		};
 	};
 };

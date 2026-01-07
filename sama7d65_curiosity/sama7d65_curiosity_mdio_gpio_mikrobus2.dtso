@@ -1,0 +1,69 @@
+/* 
+ * Device Tree overlay for MDIO Bitbang using GPIO
+ * on SAMA7D65 Curiosity Kit Mikrobus 2
+ *
+ * Copyright (C) 2026 Microchip Technology, Inc.
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * Status: Working
+ */
+
+ /*
+  * J26 MikroBus 2 Pinout
+  * AN - AD8 - MBUS2_AN_PC13 <- MDIO-2
+  * RST - nRST_MBUS
+  * CS - FLEXCOM4_IO4 - MBUS2_SPI_CS_PA14
+  * SCK - FLEXCOM4_IO2 - MBUS2_SPI_SCK_PA16
+  * MISO - FLEXCOM4_IO1 - MBUS2_SPI_MISO_PA17
+  * MOSI - FLEXCOM4_IO0 - MBUS2_SPI_MOSI_PA18
+  * ====
+  * PWM - PMWL1 - MBUS2_PWM_PB17    
+  * INT -  - MBUS2_INT_PA22 (Pull-up 110k) <- MDC-2
+  * RX - FLEXCOM5_IO1 - MBUS2_RX/CAN4_RX_PD17
+  * TX - FLEXCOM5_IO0 - MBUS2_TX/CAN4_TX_PD16
+  * SCL - FLEXCOM0_IO1 - MBUS2_TWCK_PC6
+  * SDA - FLEXCOM0_IO0 - MBUS2_TWD_PC7
+  */
+
+/dts-v1/;
+/plugin/;
+
+#include "sama7d65-pinfunc.h"
+#include <dt-bindings/mfd/atmel-flexcom.h>
+#include "dt-bindings/pinctrl/at91.h"
+#include "dt-bindings/gpio/gpio.h"
+#include "dt-bindings/interrupt-controller/irq.h"
+
+&{/} {
+
+    model = "SAMA7D65 Curiosity Kit Mikrobus 2 MDIO GPIO";
+
+    /* MDIO 2 */
+    mdio2: mdio2 {
+        compatible = "virtual,mdio-gpio";
+        #address-cells = <1>;
+        #size-cells = <0>;
+        gpios = <&pioa PIN_PA22 GPIO_ACTIVE_HIGH>, <&pioa PIN_PC13 GPIO_ACTIVE_HIGH>; //MDC, MDIO
+        /* https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt */
+    }; 
+    
+    aliases {
+        mdio-gpio2 = "/mdio2";
+    };                  
+};
+
+&pioa {
+
+    /* MDIO 2 */
+    mdio-gpio2-mdio {
+        pinmux = <PIN_PC13__GPIO>;
+        label = "mdio-gpio2-mdio";
+    };
+
+    mdio-gpio2-mdc {
+        pinmux = <PIN_PA22__GPIO>;
+        label = "mdio-gpio2-mdc";
+    };
+};
+
+
+
