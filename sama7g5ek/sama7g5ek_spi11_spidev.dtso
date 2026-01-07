@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * SAMA7G5 FLEXCOM11 SPIDEV - Device Tree file for SAMA7G5-EK board
+ * overlay blob for FLEXCOM11 SPIDEV.
+ *
+ * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * 
+ * Status: Tested - Using SAMA7G54 Evaluation Kit
+ * Notes:
+ *
+ */
+/dts-v1/;
+/plugin/;
+
+//Standard for Overlays
+#include "sama7g5-pinfunc.h"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/mfd/atmel-flexcom.h>
+
+
+&spi11 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	
+	spidev@0 {
+		reg = <0>;
+		compatible = "atmel,at91rm9200-spidev";
+		spi-max-frequency = <30000000>;
+		status = "okay";
+	};
+};
+
+
+
+
+

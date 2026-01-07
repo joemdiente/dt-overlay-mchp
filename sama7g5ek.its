@@ -134,6 +134,21 @@
 				algo = "sha1";
 			};
 		};
+		
+		fdt_flx0_spi {
+			description = "Device Tree blob FLEXCOMM0 SPI overlay";
+			data = /incbin/("./sama7g5ek/sama7g5ek_flx0_spi.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61700000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
 
 		fdt_spi_click1 {
 			description = "Device Tree blob at25ff321a spi flash clickboard overlay";
@@ -141,7 +156,52 @@
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x61700000>;
+			load = <0x61800000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_spi0_spidev {
+			description = "Device Tree blob SPIDEV on Flexcomm0 SPI overlay";
+			data = /incbin/("./sama7g5ek/sama7g5ek_spi0_spidev.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61900000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+		 
+		fdt_spi11_spidev {
+			description = "Device Tree blob SPIDEV on Mikrobus 1 overlay";
+			data = /incbin/("./sama7g5ek/sama7g5ek_spi11_spidev.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x62000000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_lan9668 {
+			description = "Device Tree blob EVB-LAN9668 Target Property overlay";
+			data = /incbin/("./sama7g5ek/meba_lan966x_8290_0.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x62100000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -195,8 +255,28 @@
 			fdt = "fdt_pdmc0";
 		};
 
+		flx0_spi {
+			description = "FDT overlay blob for FLEXCOMM0 SPI";
+			fdt = "fdt_flx0_spi";
+		};
+		
+		lan9668 {
+			description = "FDT overlay blob for EVB-LAN9668 target property";
+			fdt = "fdt_lan9668";
+		};
+
+		spi0_spidev {
+			description = "FDT overlay blob for SPIDEV on Flexcomm0 Mode A";
+			fdt = "fdt_spi0_spidev";
+		};
+
+		spi11_spidev {
+			description = "FDT overlay blob for SPIDEV on Mikrobus 1";
+			fdt = "fdt_spi11_spidev";
+		};
+
 		spi_click1 {
-			description = "FDT overlay blob for at25ff321a spi flash clickboard (1)";
+			description = "FDT overlay blob for at25ff321a spi flash clickboard";
 			fdt = "fdt_spi_click1";
 		};
 	};

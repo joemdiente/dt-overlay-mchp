@@ -1,0 +1,74 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * SAMA7G5 FLEXCOMM0 SPI - Device Tree file for SAMA7G5-EK board
+ * overlay blob for FLEXCOM0 SPI.
+ *
+ * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * 
+ * Status: Tested - Using SAMA7G54 Evaluation Kit
+ * Notes: This is not part of SAMA7G5 DTSI and is only an attempt/experiment
+ * to use SPI in FLEXCOMM0 using information from the datasheet.
+ *
+ */
+/dts-v1/;
+/plugin/;
+
+//Standard for Overlays
+#include "sama7g5-pinfunc.h"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/mfd/atmel-flexcom.h>
+
+//Added New Properties
+#include <dt-bindings/clock/at91.h>
+#include <dt-bindings/dma/at91.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/* FLEXCOM Description
+ * FLEXCOM_IO0 - MOSI
+ * FLEXCOM_IO1 - MISO
+ * FLEXCOM_IO2 - SPCK
+ * FLEXCOM_IO3 - NPCS0/NSS
+ * FLEXCOM_IO4 - NPCS1
+ */
+
+&pioA {
+	pinctrl_flx0_spi: flx0_spi {
+		pinmux = <PIN_PE3__FLEXCOM0_IO0>, 
+			 <PIN_PE4__FLEXCOM0_IO1>,
+			 <PIN_PE5__FLEXCOM0_IO2>;
+		bias-disable;
+	};
+
+	pinctrl_flx0_spi_cs: flx0_spi_cs {
+		pinmux = <PIN_PE6__FLEXCOM0_IO3>;
+		bias-disable;	
+	};
+};
+
+&flx0 {
+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
+	#address-cells = <1>;
+	#size-cells = <1>;
+	status = "okay";
+
+	spi0: spi@400 {
+		compatible = "atmel,at91rm9200-spi";
+		reg = <0x400 0x200>;
+		interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&pmc PMC_TYPE_PERIPHERAL 38>;
+		clock-names = "spi_clk";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		atmel,fifo-size = <32>;
+		dmas = <&dma0 AT91_XDMAC_DT_PERID(5)>,
+				<&dma0 AT91_XDMAC_DT_PERID(6)>;
+		dma-names = "rx", "tx";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_flx0_spi &pinctrl_flx0_spi_cs>;
+		status = "okay";
+	};
+};
+
+
