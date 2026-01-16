@@ -79,7 +79,7 @@
 		reg = <1>;
 		compatible = "atmel,at91rm9200-spidev";
 		spi-max-frequency = <30000000>;
-		status = "okay";
+		status = "okay"; 
 	};
 };
 
@@ -88,13 +88,16 @@
 		pinmux = <PIN_PA18__FLEXCOM4_IO0>,	/* MOSI */
 			 <PIN_PA17__FLEXCOM4_IO1>,	/* MISO */
 			 <PIN_PA16__FLEXCOM4_IO2>,	/* SPCK */
-			 <PIN_PA14__FLEXCOM4_IO4>;	/* CS0 */
+			 <PIN_PA15__FLEXCOM4_IO3>,	/* CS0 */
+			 <PIN_PA14__FLEXCOM4_IO4>,	/* CS1 */
+			 <PIN_PA19__FLEXCOM4_IO5>,	/* CS2 */
+			 <PIN_PA20__FLEXCOM4_IO6>;	/* CS3 */
     bias-disable;
   };
 };
 
 &{/} {
-	model = "SAMA7D65 Curiosity Kit MikroBUS 1 SPIDEV";
+	model = "SAMA7D65 Curiosity Kit MikroBUS 2 SPIDEV";
 };
  
  
