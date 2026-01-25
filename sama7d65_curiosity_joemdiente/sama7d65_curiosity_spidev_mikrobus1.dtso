@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
  * sama7d65_curiosity_spidev_mikrobus1.dtso - Device Tree file for SAMA7D65 Curiosity Kit
- * board overlay for MikroBus 2 SPIDEV
+ * board overlay for MikroBus 1 SPIDEV
  *
  * Copyright (C) 2026 Microchip Technology, Inc.
  * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
@@ -72,32 +72,25 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
   pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_spi4_cs1_default>;
+	pinctrl-0 = <&pinctrl_spi4_cs0_default>;
 	status = "okay";
 
-	spidev@1 {
-		reg = <1>;
+	spidev@0 {
+		reg = <0>;
 		compatible = "atmel,at91rm9200-spidev";
 		spi-max-frequency = <30000000>;
-		status = "okay"; 
+		status = "okay";
 	};
 };
 
 &pioa {
-  pinctrl_spi4_cs1_default: spi4-cs1-default {
+  pinctrl_spi4_cs0_default: spi4-cs0-default {
 		pinmux = <PIN_PA18__FLEXCOM4_IO0>,	/* MOSI */
 			 <PIN_PA17__FLEXCOM4_IO1>,	/* MISO */
 			 <PIN_PA16__FLEXCOM4_IO2>,	/* SPCK */
-			 <PIN_PA15__FLEXCOM4_IO3>,	/* CS0 */
-			 <PIN_PA14__FLEXCOM4_IO4>,	/* CS1 */
-			 <PIN_PA19__FLEXCOM4_IO5>,	/* CS2 */
-			 <PIN_PA20__FLEXCOM4_IO6>;	/* CS3 */
+			 <PIN_PA15__FLEXCOM4_IO3>;	/* CS0 */
     bias-disable;
   };
-};
-
-&{/} {
-	model = "SAMA7D65 Curiosity Kit MikroBUS 2 SPIDEV";
 };
  
  

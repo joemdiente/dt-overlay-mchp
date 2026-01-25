@@ -35,8 +35,6 @@
 
 &{/} {
 
-    model = "SAMA7D65 Curiosity Kit Mikrobus 2 MDIO GPIO";
-
     /* MDIO 2 */
     mdio2: mdio2 {
         compatible = "virtual,mdio-gpio";
