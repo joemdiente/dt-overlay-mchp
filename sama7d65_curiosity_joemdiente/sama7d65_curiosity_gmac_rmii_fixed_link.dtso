@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
  *  Device Tree overlay for the SAMA7D65-CURIOSITY board
- *  to use a single-port RMII PHY daughter card.
+ *  to use fixed link RMII.
  *
- *  Copyright (c) 2025 Microchip Technology Inc. and its subsidiaries
+ *  Copyright (c) 2026 Microchip Technology Inc. and its subsidiaries
  *
- *  Author: Jerry Ray <jerry.ray@microchip.com>
+ *  Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
  *
  */
 /dts-v1/;
@@ -19,7 +19,7 @@
 
 &{/}
 {
-	model = "Microchip SAMA7D65 Curiosity single-port RMII";
+	model = "Microchip SAMA7D65 Curiosity Fixed Link RMII";
 };
 
 &flx4 {
@@ -37,9 +37,9 @@
 		     &pinctrl_gmac1_phy_irq>;
 	status = "okay";
 
-	ethernet-phy@1 {
-		compatible = "ethernet-phy-ieee802.3-c22";
-		status = "okay";
+	fixed-link {
+		speed = <100>;
+		full-duplex;
 	};
 };
 

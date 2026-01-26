@@ -270,9 +270,9 @@
 			};
 		};
 
-		fdt_gmac_rmii_fixed_phy {
-			description = "Device Tree blob for an RMII with Fixed PHY overlay";
-			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_rmii_fixed_phy.dtbo");
+		fdt_gmac_rmii_fixed_link {
+			description = "Device Tree blob for an RMII with Fixed Link overlay";
+			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_rmii_fixed_link.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
