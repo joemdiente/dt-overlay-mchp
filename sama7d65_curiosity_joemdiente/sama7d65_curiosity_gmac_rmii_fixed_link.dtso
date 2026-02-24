@@ -34,26 +34,14 @@
 		     &pinctrl_gmac1_rxer_default
 		     &pinctrl_gmac1_mdc_default
 		     &pinctrl_gmac1_mdio_default
+		     &pinctrl_gmac1_txck_default
 		     &pinctrl_gmac1_phy_irq>;
+	// cdns,refclk-ext;
 	status = "okay";
 
 	fixed-link {
 		speed = <100>;
 		full-duplex;
-	};
-};
-
-&i2c10 {
-	#address-cells = <1>;
-	#size-cells = <0>;
-	dmas = <0>, <0>;
-	status = "okay";
-
-	eeprom@54 {
-		compatible = "atmel,24c01";
-		reg = <0x54>;
-		pagesize = <8>;
-		status = "okay";
 	};
 };
 
@@ -63,7 +51,6 @@
 			 <PIN_PD23__G1_TX1>,
 			 <PIN_PD27__G1_RX0>,
 			 <PIN_PD28__G1_RX1>,
-			 <PIN_PD29__G1_REFCK>,
 			 <PIN_PD21__G1_TXCTL>,
 			 <PIN_PD24__G1_RXCTL>;
 		slew-rate = <0>;
