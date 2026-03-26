@@ -120,6 +120,21 @@
 			};
 		};
 
+		fdt_gmac_ksz9131 {
+			description = "Device Tree blob for KSZ9131 Gigabit PHY EDS2 overlay";
+			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_ksz9131.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61250000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
 		fdt_gmac_ksz9477 {
 			description = "Device Tree blob for KSZ9477 Gigabit switch overlay";
 			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_ksz9477.dtbo");
@@ -342,7 +357,7 @@
 
 		ksz9131 {
 			description = "FDT overlay blob for KSZ9131";
-			fdt = "fdt_gmac_lan8840";
+			fdt = "fdt_gmac_ksz9131";
 		};
 
 		ksz9477 {
