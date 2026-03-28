@@ -1,0 +1,76 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sama7d65_curiosity_spidev_eds2.dtso - Device Tree file for SAMA7D65 Curiosity Kit
+ * SPIDEV on EDS2 Connector overlay.
+ *
+ * Copyright (C) 2026 Microchip Technology, Inc.
+ * Author: Joemel John A. Diente <JoemelJohn.Diente@microchip.com>
+ * Status: WIP
+ * 
+ * Note: Make sure to add the following on ./linux/drivers/spi/spidev.c:
+ *
+ *  static const struct spi_device_id spidev_spi_ids[] = {
+ *  .........
+ *    { .name = at91rm9200-spidev },
+ *  	{},
+ *  };
+ *
+ *  AND 
+ *  static const struct of_device_id spidev_dt_ids[] = {
+ *  .........
+ *    { .compatible = "atmel,at91rm9200-spidev", .data = &spidev_of_check },
+ *	  {},
+ *  };
+ *
+ * Then rebuild linux.
+ */
+ 
+/*
+ * EDS2 Connector Pin out
+ */ 
+
+/dts-v1/;
+/plugin/;
+#include "sama7d65-pinfunc.h"
+#include <dt-bindings/mfd/atmel-flexcom.h>
+#include <dt-bindings/pinctrl/at91.h>
+
+&flx4 {
+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
+	status = "okay";
+};
+
+&spi4 {													
+	#address-cells = <1>;
+	#size-cells = <0>;
+  	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_spi4_default>;
+	status = "okay";
+
+	spidev@3 {
+		reg = <3>;
+		compatible = "atmel,at91rm9200-spidev";
+		spi-max-frequency = <30000000>;
+		status = "okay";
+	};
+};
+
+&pioa {
+	pinctrl_spi4_default: spi4-default{
+		pinmux = <PIN_PA18__FLEXCOM4_IO0>,	/* MOSI */
+			 <PIN_PA17__FLEXCOM4_IO1>,	/* MISO */
+			 <PIN_PA16__FLEXCOM4_IO2>,	/* SPCK */
+			 <PIN_PA15__FLEXCOM4_IO3>,	/* CS0 */
+			 <PIN_PA14__FLEXCOM4_IO4>,	/* CS1 */
+			 <PIN_PA19__FLEXCOM4_IO5>,	/* CS2 */
+			 <PIN_PA20__FLEXCOM4_IO6>;	/* CS3 */
+		bias-disable;
+	};
+};
+
+&{/} {
+	model = "SAMA7D65 Curiosity Kit SPIDEV on EDS2 Connector";
+};
+ 
+ 
+ 
