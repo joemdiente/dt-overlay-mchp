@@ -21,6 +21,8 @@ declare -A MAKE=( 								\
 declare -A DTSO_DIR_TO_CFG=(							\
 	["mpfs_icicle"]="defconfig"						\
 	["mpfs_icicle_amp"]="defconfig"
+	["mpfs_video"]="defconfig"						\
+	["pic64gx_curiosity_kit"]="defconfig"					\
 	["sam9x60ek"]="at91_dt_defconfig"					\
 	["sam9x75eb"]="at91_dt_defconfig"					\
 	["sam9x75_curiosity"]="at91_dt_defconfig"				\
@@ -34,6 +36,7 @@ declare -A DTSO_DIR_TO_CFG=(							\
 	["sama5d3_eds"]="sama5_defconfig"					\
 	["sama5d3_xplained"]="sama5_defconfig"					\
 	["sama5d4_xplained"]="sama5_defconfig"					\
+	["sama7d65_curiosity"]="sama7_defconfig"				\
 	["sama7g5ek"]="sama7_defconfig"						\
 	["sama7g54_curiosity"]="sama7_defconfig"				\
 			);
@@ -42,21 +45,24 @@ declare -A DTSO_DIR_TO_CFG=(							\
 declare -A DTSO_DIR_TO_DT=(							\
 	["mpfs_icicle"]="microchip/mpfs-icicle-kit.dt"				\
 	["mpfs_icicle_amp"]="microchip/mpfs-icicle-kit-context-a.dt"		\
-	["sam9x60ek"]="at91-sam9x60ek.dt"					\
-	["sam9x75eb"]="at91-sam9x75eb.dt"					\
-	["sam9x75_curiosity"]="at91-sam9x75_curiosity.dt"			\
-	["sama5d2_icp"]="at91-sama5d2_icp.dt"					\
-	["sama5d2_ptc_ek"]="at91-sama5d2_ptc_ek.dt"				\
-	["sama5d2_xplained"]="at91-sama5d2_xplained.dt"				\
-	["sama5d2_xplained_grts"]="at91-sama5d2_xplained.dt"			\
-	["sama5d27_som1_ek"]="at91-sama5d27_som1_ek.dt"				\
-	["sama5d27_wlsom1_ek"]="at91-sama5d27_wlsom1_ek.dt"			\
-	["sama5d29_curiosity"]="at91-sama5d29_curiosity.dt"			\
-	["sama5d3_eds"]="at91-sama5d3_eds.dt"					\
-	["sama5d3_xplained"]="at91-sama5d3_xplained.dt"				\
-	["sama5d4_xplained"]="at91-sama5d4_xplained.dt"				\
-	["sama7g5ek"]="at91-sama7g5ek.dt"					\
-	["sama7g54_curiosity"]="at91-sama7g54_curiosity.dt"			\
+	["mpfs_video"]="microchip/mpfs-video-kit.dt"				\
+	["pic64gx_curiosity_kit"]="microchip/pic64gx-curiosity-kit.dt"		\
+	["sam9x60ek"]="microchip/at91-sam9x60ek.dt"					\
+	["sam9x75eb"]="microchip/at91-sam9x75eb.dt"					\
+	["sam9x75_curiosity"]="microchip/at91-sam9x75_curiosity.dt"			\
+	["sama5d2_icp"]="microchip/at91-sama5d2_icp.dt"					\
+	["sama5d2_ptc_ek"]="microchip/at91-sama5d2_ptc_ek.dt"				\
+	["sama5d2_xplained"]="microchip/at91-sama5d2_xplained.dt"				\
+	["sama5d2_xplained_grts"]="microchip/at91-sama5d2_xplained.dt"			\
+	["sama5d27_som1_ek"]="microchip/at91-sama5d27_som1_ek.dt"				\
+	["sama5d27_wlsom1_ek"]="microchip/at91-sama5d27_wlsom1_ek.dt"			\
+	["sama5d29_curiosity"]="microchip/at91-sama5d29_curiosity.dt"			\
+	["sama5d3_eds"]="microchip/at91-sama5d3_eds.dt"					\
+	["sama5d3_xplained"]="microchip/at91-sama5d3_xplained.dt"				\
+	["sama5d4_xplained"]="microchip/at91-sama5d4_xplained.dt"				\
+	["sama7d65_curiosity"]="microchip/at91-sama7d65_curiosity.dt"			\
+	["sama7g5ek"]="microchip/at91-sama7g5ek.dt"					\
+	["sama7g54_curiosity"]="microchip/at91-sama7g54_curiosity.dt"			\
 			);
 
 print_options() {
@@ -182,15 +188,14 @@ setup() {
 		O=${KERNEL_DIR};
 	fi;
 
-	# Update the defconfig MAKE element, now that we know the requested board
-	CFG=${DTSO_DIR_TO_CFG[$(basename ${DTSO_DIR})]};
-	MAKE["defconfig"]="make ${CFG}";
-
-	# Based on the location of the defconfig find out the architecture
-	ARCH=$(
-		find ${KERNEL_DIR} -type f -name $(basename ${DTSO_DIR_TO_DT[$(basename ${DTSO_DIR})]})s | # Find defconfig location
-		grep -oP '(?<=arch/).*?(?=/)' # Extract the string between "arch/" and "/"
-	      );
+	if [[ -z "${ARCH}" ]];
+	then
+		# Based on the location of the defconfig find out the architecture
+		ARCH=$(
+			find ${KERNEL_DIR} -type f -name $(basename ${DTSO_DIR_TO_DT[$(basename ${DTSO_DIR})]})s | # Find defconfig location
+			grep -oP '(?<=arch/).*?(?=/)' # Extract the string between "arch/" and "/"
+		      );
+	fi;
 
 	# Append the ARCH and KLOG_BLACKLIST filters to the `make` commands
 	update_recipes "ARCH=${ARCH} | egrep -v \"\${KLOG_BLACKLIST}\"";
@@ -254,6 +259,9 @@ do
 	case "${OPTION}" in
 	b)
 		DTSO_DIR=$(realpath -s ${OPTARG});
+		# Update the defconfig MAKE element, now that we know the requested board
+		CFG=${DTSO_DIR_TO_CFG[$(basename ${DTSO_DIR})]};
+		MAKE["defconfig"]="make ${CFG}";
 		;;
 	d)
 		ELOG=$(realpath -s ${OPTARG});
@@ -264,14 +272,12 @@ do
 		;;
 	j)
 		THREADS_COUNT=${OPTARG};
-		update_recipes "-j${THREADS_COUNT}";
 		;;
 	k)
 		KERNEL_DIR=$(realpath -s ${OPTARG});
 		;;
 	o)
 		O=$(realpath -s ${OPTARG});
-		update_recipes "O=${O}";
 		;;
 	s)
 		BACKUP_PATH=$(realpath -s ${OPTARG});
@@ -280,6 +286,9 @@ do
 		VERBOSE=true;
 		;;
 	esac
+
+	update_recipes "-j${THREADS_COUNT}";
+	update_recipes "O=${O}";
 done;
 
 setup;

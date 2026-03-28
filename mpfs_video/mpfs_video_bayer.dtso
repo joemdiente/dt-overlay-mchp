@@ -13,7 +13,7 @@
 #include <dt-bindings/gpio/gpio.h>
 
 / {
-        compatible = "microchip,mpfs-video-kit","microchip,mpfs";
+	compatible = "microchip,mpfs-video-kit","microchip,mpfs-sev-kit","microchip,mpfs";
 };
 
 &{/} {
@@ -53,6 +53,12 @@
 &fabric_bus {
 	#address-cells = <2>;
 	#size-cells = <2>;
+
+	dma-ranges = <0x14 0x0 0x0 0x80000000 0x0 0x4000000>,
+                     <0x14 0x4000000 0x0 0xc4000000 0x0 0x6000000>,
+                     <0x14 0xa000000 0x0 0x8a000000 0x0 0x8000000>,
+                     <0x14 0x12000000 0x14 0x12000000 0x0 0x10000000>,
+                     <0x14 0x22000000 0x10 0x22000000 0x0 0x5e000000>;
 
 	mchp_vdma_cam0: video-pipeline@60000000 {
 		compatible = "microchip,video-dma-rtl-v0";
@@ -98,6 +104,7 @@
 			port@0 {
 				reg = <0>;
 				csi2_0_in: endpoint {
+					data-lanes = <1 2 3 4>;
 					remote-endpoint = <&imx334_ep_cam0>;
 				};
 			};
@@ -124,17 +131,11 @@
 		reg = <0x1a>;
 		status = "okay";
 
-		ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			port@0 {
-				reg = <0>;
-				imx334_ep_cam0: endpoint {
-					remote-endpoint = <&csi2_0_in>;
-					data-lanes = <1 2 3 4>;
-					link-frequencies = /bits/ 64 <891000000 445500000>;
-				};
+		port {
+			imx334_ep_cam0: endpoint {
+				remote-endpoint = <&csi2_0_in>;
+				data-lanes = <1 2 3 4>;
+				link-frequencies = /bits/ 64 <891000000 445500000>;
 			};
 		};
 	};
