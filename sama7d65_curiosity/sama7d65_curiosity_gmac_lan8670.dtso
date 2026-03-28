@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
  *  Device Tree overlay for the SAMA7D65-CURIOSITY board
- *  to use a single-port RMII PHY daughter card.
+ *  to use a LAN8670 10Base-T1S PHY daughter card.
  *
- *  Copyright (c) 2025 Microchip Technology Inc. and its subsidiaries
+ *  Copyright (c) 2026 Microchip Technology Inc. and its subsidiaries
  *
  *  Author: Jerry Ray <jerry.ray@microchip.com>
+ *
+ * Refer to the EV39N38A (LAN8670-EDS2 daughter card)
  *
  */
 /dts-v1/;
@@ -19,7 +21,7 @@
 
 &{/}
 {
-	model = "Microchip SAMA7D65 Curiosity single-port RMII";
+	model = "Microchip SAMA7D65 Curiosity w/ 10BaseT1S";
 };
 
 &flx10 {
@@ -28,6 +30,8 @@
 };
 
 &gmac1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
 	phy-mode = "rmii";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gmac1_rmii_default
@@ -38,7 +42,10 @@
 	cdns,refclk-ext;
 	status = "okay";
 
-	ethernet-phy@1 {
+	t1s_phy2: ethernet-phy@2 {
+		reg = <0x2>;
+		interrupt-parent = <&pioa>;
+		interrupts = <PIN_PE3 IRQ_TYPE_LEVEL_LOW>;
 		status = "okay";
 	};
 };

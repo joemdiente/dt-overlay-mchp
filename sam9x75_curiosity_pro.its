@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * Flattened Image Tree file for SAM9X75-Curiosity board
+ * Flattened Image Tree file for SAM9X75-Curiosity-Pro board
  *
- * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries
+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
  *
- * Author: Varshini Rajendran <Varshini.Rajendran@microchip.com>
+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
  */
 /dts-v1/;
 
 / {
-	description = "Microchip SAM9X75-Curiosity FIT Image";
+	description = "Microchip SAM9X75-Curiosity-Pro FIT Image";
 	#address-cells = <1>;
 
 	images {
@@ -31,8 +31,8 @@
 		};
 
 		base_fdt {
-			description = "SAM9X75-Curiosity Flattened Device Tree blob";
-			data = /incbin/("./at91-sam9x75_curiosity.dtb");
+			description = "SAM9X75-Curiosity-Pro Flattened Device Tree blob";
+			data = /incbin/("./at91-sam9x75_curiosity_pro.dtb");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -47,7 +47,7 @@
 
 		fdt_isc_imx219 {
 			description = "Device Tree blob ISC IMX219 overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_isc_imx219.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_isc_imx219.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -62,7 +62,7 @@
 
 		fdt_lvds_panel {
 			description = "Device Tree blob for AC69T88A LVDS Display Panel";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_lvds_display.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_lvds_display.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -77,7 +77,7 @@
 
 		fdt_lvds_panel_newvision {
 			description = "Device Tree blob for New Vision Display Panel";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_lvds_newvision_display.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_lvds_newvision_display.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -91,8 +91,8 @@
 		};
 
 		fdt_gmac_rmii_phy {
-			description = "Device Tree blob for LAN8840 RGMII PHY overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_rmii-phy.dtbo");
+			description = "Device Tree blob for Generic RMII PHY overlay";
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_rmii-phy.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -105,9 +105,9 @@
 			};
 		};
 
-		fdt_gmac_lan8840 {
-			description = "Device Tree blob for LAN8840 RGMII PHY overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_lan8840.dtbo");
+		fdt_gmac_rgmii_phy {
+			description = "Device Tree blob for Generic RGMII PHY overlay";
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_rgmii-phy.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -122,7 +122,7 @@
 
 		fdt_gmac_lan9646 {
 			description = "Device Tree blob for LAN9646 RGMII switch overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_lan9646.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_lan9646.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -137,7 +137,7 @@
 
 		fdt_gmac_ksz8795 {
 			description = "Device Tree blob for KSZ8795 RMII switch overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_ksz8795.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_ksz8795.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -152,7 +152,7 @@
 
 		fdt_gmac_ksz8895 {
 			description = "Device Tree blob for KSZ8895 RMII switch overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_ksz8895.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_ksz8895.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -167,7 +167,7 @@
 
 		fdt_gmac_ksz9477 {
 			description = "Device Tree blob for KSZ9477 RGMII switch overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_ksz9477.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_ksz9477.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -182,7 +182,7 @@
 
 		fdt_gmac_ksz9563 {
 			description = "Device Tree blob for KSZ9563 RGMII switch overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_ksz9563.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_gmac_ksz9563.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -195,24 +195,9 @@
 			};
 		};
 
-		fdt_gmac_lan8670 {
-			description = "Device Tree overlay for a LAN8670 RMII 10BaseT1S PHY";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_gmac_lan8670.dtbo");
-			type = "flat_dt";
-			arch = "arm";
-			compression = "none";
-			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
-			};
-		};
-
 		fdt_i2s_proto {
 			description = "Device Tree blob PROTO Audio board overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_i2s_proto.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_i2s_proto.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -227,7 +212,7 @@
 
 		fdt_mipi_panel {
 			description = "Device Tree blob for AC40T08A MPU32 MIPI Display Panel";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_mipi_display.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_mipi_display.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -242,7 +227,7 @@
 
 		fdt_pwm {
 			description = "Device Tree blob for PWM signals";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_pwm.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_pwm.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -257,7 +242,7 @@
 
 		fdt_spi_click {
 			description = "Device Tree blob at25ff321a spi flash clickboard overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_at25ff321a_click.dtbo");
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_at25ff321a_click.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -270,9 +255,9 @@
 			};
 		};
 
-		fdt_wilcs02 {
-			description = "Device Tree blob WILCS02 overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_wilcs02.dtbo");
+		fdt_wifi_st60 {
+			description = "Device Tree blob for ST60 WIFI chip with USART BLE overlay";
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_wifi_st60.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -285,13 +270,13 @@
 			};
 		};
 
-		fdt_wilcs02_spi {
-			description = "Device Tree blob WILCS02 in SPI mode overlay";
-			data = /incbin/("./sam9x75_curiosity/sam9x75_curiosity_wilcs02_spi.dtbo");
+		fdt_wifi_mt320 {
+			description = "Device Tree blob for MT320 WIFI/BLE chip overlay";
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_wifi_mt320.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
-			load = <0x23180000>;
+			load = <0x23170000>;
 			hash-1 {
 				algo = "crc32";
 			};
@@ -305,13 +290,13 @@
 		default = "kernel_dtb";
 
 		kernel_dtb {
-			description = "Linux kernel and base FDT blob for SAM9X75-Curiosity board";
+			description = "Linux kernel and base FDT blob for SAM9X75-Curiosity-Pro board";
 			kernel = "kernel";
 			fdt = "base_fdt";
 		};
 
 		base_dtb {
-			description = "Base FDT blob for SAM9X75-Curiosity board";
+			description = "Base FDT blob for SAM9X75-Curiosity-Pro board";
 			fdt = "base_fdt";
 		};
 
@@ -335,14 +320,24 @@
 			fdt = "fdt_gmac_rmii_phy";
 		};
 
+		rgmii-phy {
+			description = "FDT overlay blob for Single-port RGMII PHY Daughter Card";
+			fdt = "fdt_gmac_rgmii_phy";
+		};
+
 		ksz9131 {
 			description = "FDT overlay blob for KSZ9131 RGMII PHY Daughter Card";
-			fdt = "fdt_gmac_lan8840";
+			fdt = "fdt_gmac_rgmii_phy";
 		};
 
 		lan8840 {
 			description = "FDT overlay blob for LAN8840 RGMII PHY Daughter Card";
-			fdt = "fdt_gmac_lan8840";
+			fdt = "fdt_gmac_rgmii_phy";
+		};
+
+		vsc8541 {
+			description = "FDT overlay blob for VSC8541 RGMII PHY EDS2 Daughter Card";
+			fdt = "fdt_gmac_rgmii_phy";
 		};
 
 		lan9646 {
@@ -370,11 +365,6 @@
 			fdt = "fdt_gmac_ksz9563";
 		};
 
-		lan8670 {
-			description = "FDT overlay blob for a LAN8670 T1S PHY";
-			fdt = "fdt_gmac_lan8670";
-		};
-
 		i2s_proto {
 			description = "FDT overlay blob for I2S PROTO audio board";
 			fdt = "fdt_i2s_proto";
@@ -395,14 +385,14 @@
 			fdt = "fdt_spi_click";
 		};
 
-		wilc {
-			description = "FDT overlay blob for WILCS02";
-			fdt = "fdt_wilcs02";
+		wifi_st60 {
+			description = "FDT overlay blob with ST60 WIFI module with UART";
+			fdt = "fdt_wifi_st60";
 		};
 
-		wilc_spi {
-			description = "FDT overlay blob for WILCS02 in SPI mode overlay";
-			fdt = "fdt_wilcs02_spi";
+		wifi_mt320 {
+			description = "FDT overlay blob with MT320 WIFI module";
+			fdt = "fdt_wifi_mt320";
 		};
 	};
 };

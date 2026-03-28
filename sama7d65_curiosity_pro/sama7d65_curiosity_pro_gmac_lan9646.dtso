@@ -1,54 +1,60 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * Device Tree file for SAM9X75 CURIOSITY board overlay blob supporting the
+ * Device Tree file for SAMA7D65 CURIOSITY-PRO board overlay blob supporting the
  * LAN9646 6-port Gigabit switch Daughter Card using I2C or SPI and RGMII.
  *
- * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
+ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
  *
- * Author: Jerry Ray <jerry.ray@microchip.com>
+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
  *
  * Refer to the EV94T99A (LAN9646-EDS2 daughter card)
  *
  */
 /dts-v1/;
 /plugin/;
-
+#include "sama7d65-pinfunc.h"
+#include <dt-bindings/mfd/atmel-flexcom.h>
+#include <dt-bindings/clock/at91.h>
+#include <dt-bindings/pinctrl/at91.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/interrupt-controller/irq.h>
-#include <dt-bindings/mfd/atmel-flexcom.h>
-#include <dt-bindings/pinctrl/at91.h>
 
-&flx3 {
+&{/}
+{
+	model = "Microchip SAMA7D65 Curiosity Pro LAN9646 Gigabit Switch";
+
+	sfp: sfp {
+		compatible = "sff,sfp";
+		i2c-bus = <&i2c10>;
+	};
+};
+
+&flx4 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
 	status = "okay";
 };
 
-&flx7 {
-	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-	status = "okay";
-};
-
-&gmac {
-	phy-mode = "rgmii-id";
+&gmac0 {
+	#address-cells = <1>;
+	#size-cells = <0>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_gmac_rgmii_default>;
-	magic-packet;
+	pinctrl-0 = <&pinctrl_gmac0_default
+		     &pinctrl_gmac0_mdio_default
+		     &pinctrl_gmac0_txck_default
+		     &pinctrl_gmac0_phy_irq>;
+	phy-mode = "rgmii-id";
 	status = "okay";
 
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
+		pause;
 	};
 };
 
-&i2c7 {
+&i2c10 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flx7_twi_default>;
-	i2c-analog-filter;
-	i2c-digital-filter;
-	i2c-digital-filter-width-ns = <35>;
 	dmas = <0>, <0>;
 	status = "okay";
 
@@ -62,8 +68,8 @@
 	lan9646i2c: lan9646i-switch@5f {
 		compatible = "microchip,lan9646";
 		reg = <0x5f>;
-		interrupt-parent = <&pioD>;
-		interrupts = <5 IRQ_TYPE_LEVEL_LOW>;
+		interrupt-parent = <&pioa>;
+		interrupts = <PIN_PC1 IRQ_TYPE_LEVEL_LOW>;
 		status = "okay";
 
 		ports {
@@ -94,7 +100,8 @@
 				phy-mode = "rgmii-id";
 				rx-internal-delay-ps = <2000>;
 				tx-internal-delay-ps = <2000>;
-				ethernet = <&gmac>;
+				ethernet = <&gmac0>;
+
 				fixed-link {
 					speed = <1000>;
 					full-duplex;
@@ -136,67 +143,65 @@
 	};
 };
 
-&pinctrl {
-
-	flexcom {
-		pinctrl_flx3_default: flx3-spi-default {
-			atmel,pins =
-				<AT91_PIOC 22 AT91_PERIPH_B AT91_PINCTRL_NONE
-				 AT91_PIOC 23 AT91_PERIPH_B AT91_PINCTRL_NONE
-				 AT91_PIOC 25 AT91_PERIPH_B AT91_PINCTRL_NONE
-				 AT91_PIOC 26 AT91_PERIPH_B AT91_PINCTRL_NONE>;
-		};
-
-		pinctrl_flx7_twi_default: flx7-twi-default {
-			atmel,pins =
-				<AT91_PIOC 0 AT91_PERIPH_C AT91_PINCTRL_NONE
-				 AT91_PIOC 1 AT91_PERIPH_C AT91_PINCTRL_NONE>;
-		};
+&pioa {
+	pinctrl_gmac0_default: gmac0-default {
+		pinmux = <PIN_PA26__G0_TX0>,
+			 <PIN_PA27__G0_TX1>,
+			 <PIN_PB4__G0_TX2>,
+			 <PIN_PB5__G0_TX3>,
+			 <PIN_PA29__G0_RX0>,
+			 <PIN_PA30__G0_RX1>,
+			 <PIN_PB2__G0_RX2>,
+			 <PIN_PB6__G0_RX3>,
+			 <PIN_PA25__G0_TXCTL>,
+			 <PIN_PB3__G0_RXCK>,
+			 <PIN_PA28__G0_RXCTL>;
+		slew-rate = <0>;
+		bias-disable;
 	};
 
-	gmac {
-		pinctrl_gmac_rgmii_default: gmac-rgmii-default {
-			atmel,pins =
-				<AT91_PIOB 13 AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_TX0   */
-				 AT91_PIOB 14 AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_TX1   */
-				 AT91_PIOB 4  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_TX2   */
-				 AT91_PIOB 5  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_TX3   */
-				 AT91_PIOB 7  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_TXCTL  */
-				 AT91_PIOB 6  AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_SLEWRATE_DIS)	/* ETH_TXCK  */
+	pinctrl_gmac0_mdio_default: gmac0-mdio-default {
+		pinmux = <PIN_PA31__G0_MDC>,
+			 <PIN_PB0__G0_MDIO>;
+		bias-disable;
+	};
 
-				 AT91_PIOB 11 AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RX0   */
-				 AT91_PIOB 12 AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RX1   */
-				 AT91_PIOB 0  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RX2   */
-				 AT91_PIOB 1  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RX3   */
-				 AT91_PIOB 8  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RXCK   */
-				 AT91_PIOB 3  AT91_PERIPH_A  AT91_PINCTRL_SLEWRATE_DIS				/* ETH_RXCTL */
+	pinctrl_gmac0_phy_irq: gmac0-phy-irq {
+		pinmux = <PIN_PC1__GPIO>;
+		bias-disable;
+	};
 
-				 AT91_PIOB 10 AT91_PERIPH_A  AT91_PINCTRL_NONE					/* ETH_MDC   */
-				 AT91_PIOB 9  AT91_PERIPH_A  AT91_PINCTRL_NONE					/* ETH_MDIO  */
+	pinctrl_gmac0_txck_default: gmac0-txck-default {
+		pinmux = <PIN_PB1__G0_REFCK>;
+		slew-rate = <0>;
+		bias-pull-up;
+	};
 
-				 AT91_PIOB 2  AT91_PERIPH_A  AT91_PINCTRL_DIS_SCHMIT				/* ETH_125CK */
-				 AT91_PIOD 5  AT91_PERIPH_GPIO	AT91_PINCTRL_NONE>;				/* ETH_INT   */
-		};
+	pinctrl_spi4_default: spi4-default{
+		pinmux = <PIN_PA18__FLEXCOM4_IO0>,	/* MOSI */
+			 <PIN_PA17__FLEXCOM4_IO1>,	/* MISO */
+			 <PIN_PA16__FLEXCOM4_IO2>,	/* SPCK */
+			 <PIN_PA15__FLEXCOM4_IO3>,	/* CS0 */
+			 <PIN_PA14__FLEXCOM4_IO4>,	/* CS1 */
+			 <PIN_PA19__FLEXCOM4_IO5>,	/* CS2 */
+			 <PIN_PA20__FLEXCOM4_IO6>;	/* CS3 */
+		bias-disable;
 	};
 };
 
-&spi3 {
+&spi4 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	dmas = <0>, <0>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flx3_default>;
+	pinctrl-0 = <&pinctrl_spi4_default>;
 	status = "okay";
 
-	lan9646spi: lan9646s-switch@0 {
+	lan9646: lan9646-switch@3 {
 		compatible = "microchip,lan9646";
-		reg = <0>;
-		interrupt-parent = <&pioD>;
-		interrupts = <5 IRQ_TYPE_LEVEL_LOW>;
-		spi-max-frequency = <11000000>;
-//		spi-cs-setup-delay-ns = <100>;
-//		spi-cs-hold-delay-ns = <100>;
-//		spi-cs-inactive-delay-ns = <0>;
+		reg = <3>;
+		interrupt-parent = <&pioa>;
+		interrupts = <PIN_PC1 IRQ_TYPE_LEVEL_LOW>;
+		spi-max-frequency = <10000000>;		/* 10MHz until proven */
 		spi-cpha;
 		spi-cpol;
 		status = "okay";
@@ -229,7 +234,7 @@
 				phy-mode = "rgmii-id";
 				rx-internal-delay-ps = <2000>;
 				tx-internal-delay-ps = <2000>;
-				ethernet = <&gmac>;
+				ethernet = <&gmac0>;
 				fixed-link {
 					speed = <1000>;
 					full-duplex;
@@ -268,14 +273,5 @@
 				eee-broken-1000t;
 			};
 		};
-	};
-};
-
-&{/} {
-	model = "SAM9X75-Curiosity: LAN9646 RGMII Switch Daughter Card";
-
-	sfp: sfp {
-		compatible = "sff,sfp";
-		i2c-bus = <&i2c7>;
 	};
 };

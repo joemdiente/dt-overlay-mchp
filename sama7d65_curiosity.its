@@ -135,9 +135,9 @@
 			};
 		};
 
-		fdt_gmac_lan8840 {
+		fdt_gmac_rgmii-phy {
 			description = "Device Tree blob for a Gigabit PHY overlay";
-			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_gmac_lan8840.dtbo");
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_gmac_rgmii-phy.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -240,6 +240,21 @@
 			};
 		};
 
+		fdt_gmac_lan8670 {
+			description = "Device Tree overlay for a LAN8670 RMII 10BaseT1S PHY";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_gmac_lan8670.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61500000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
 		fdt_gmac_lan8870 {
 			description = "Device Tree blob for LAN8870 Gigabit PHY overlay";
 			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_gmac_lan8870.dtbo");
@@ -330,6 +345,35 @@
 			};
 		};
 
+		fdt_i3c_lsm6dso {
+			description = "Device Tree blob for LSM6DSO IMU sensor overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_i3c_lsm6dso.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61800000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt_i3c_lsm6dsv {
+			description = "Device Tree blob for LSM6DSV IMU sensor overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_i3c_lsm6dsv.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61900000>;
+			hash-1 {
+				algo = "crc32";
+			};
+			hash-2 {
+				algo = "sha1";
+			};
+		};
 	};
 
 	configurations {
@@ -381,14 +425,19 @@
 			fdt = "fdt_gmac_rmii-phy";
 		};
 
+		rgmii-phy {
+			description = "FDT overlay blob for a RGMII PHY";
+			fdt = "fdt_gmac_rgmii-phy";
+		};
+
 		lan8840 {
 			description = "FDT overlay blob for a LAN8840 PHY";
-			fdt = "fdt_gmac_lan8840";
+			fdt = "fdt_gmac_rgmii-phy";
 		};
 
 		ksz9131 {
 			description = "FDT overlay blob for KSZ9131";
-			fdt = "fdt_gmac_lan8840";
+			fdt = "fdt_gmac_rgmii-phy";
 		};
 
 		ksz9477 {
@@ -416,6 +465,11 @@
 			fdt = "fdt_gmac_lan9646";
 		};
 
+		lan8670 {
+			description = "FDT overlay blob for a LAN8670 T1S PHY";
+			fdt = "fdt_gmac_lan8670";
+		};
+
 		lan8870 {
 			description = "FDT overlay blob for LAN8870";
 			fdt = "fdt_gmac_lan8870";
@@ -430,20 +484,15 @@
 			description = "FDT overlay blob with WM8731 Mikroe PROTO codec";
 			fdt = "fdt_wm8731_proto";
 		};
-/*
-		spidev_mikrobus1 {
-			description = "FDT overlay blob with MikroBus 1 SPIDEV";
-			fdt = "fdt_spidev_mikrobus1";
+
+		lsm6dso {
+			description = "FDT overlay blob for a LSM6DSO I3C IMU";
+			fdt = "fdt_i3c_lsm6dso";
 		};
 
-		spidev_mikrobus2 {
-			description = "FDT overlay blob with MikroBus 2 SPIDEV";
-			fdt = "fdt_spidev_mikrobus2";
-		};
-*/
-		spidev_eds2 {
-			description = "FDT overlay blob with SPIDEV on EDS2 Connector";
-			fdt = "fdt_spidev_eds2";
+		lsm6dsv {
+			description = "FDT overlay blob for a LSM6DSV I3C IMU";
+			fdt = "fdt_i3c_lsm6dsv";
 		};
 	};
 };

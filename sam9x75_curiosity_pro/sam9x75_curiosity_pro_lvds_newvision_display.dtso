@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * Device Tree file for SAM9X75 Curiosity board overlay blob
+ * Device Tree file for SAM9X75 Curiosity Pro board overlay blob
  * for Promate 10.1 LVDS Display Panel
  *
- * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
- * Author: Sandeep Sheriker M <sandeep.sheriker@microchip.com>
+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
  *
  */
 /dts-v1/;
@@ -72,10 +72,9 @@
 	status = "okay";
 };
 
-&i2c6 {
+&i2c7 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	status = "okay";
 	atmel_mxt_ts@4a {
 		compatible = "atmel,atmel_mxt_ts";
 		reg = <0x4a>;
@@ -95,7 +94,7 @@
 	clock-names = "periph_clk", "lvds_pll_clk", "slow_clk";
 	status="okay";
 
-	display-controller {
+	hlcdc-display-controller {
 		port@0 {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -106,7 +105,7 @@
 		};
 	};
 
-	pwm {
+	hlcdc_pwm: hlcdc-pwm {
 		status = "disabled";
 	};
 };

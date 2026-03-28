@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * Device Tree file for SAM9X75 CURIOSITY board overlay blob for a single-port
+ * Device Tree file for SAM9X75 CURIOSITY Pro board overlay blob for a single-port
  * RMII PHY Daughter Card.
  *
- * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
  *
- * Author: Jerry Ray <jerry.ray@microchip.com>
+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
  *
  */
 /dts-v1/;
@@ -15,11 +15,6 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/mfd/atmel-flexcom.h>
 #include <dt-bindings/pinctrl/at91.h>
-
-&flx7 {
-	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-	status = "okay";
-};
 
 &gmac {
 	phy-mode = "rmii";
@@ -38,34 +33,24 @@
 	};
 };
 
-&i2c7 {
+&i2c6 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flx7_twi_default>;
-	i2c-analog-filter;
-	i2c-digital-filter;
-	i2c-digital-filter-width-ns = <35>;
-	dmas = <0>, <0>;
-	status = "okay";
-
-	eeprom@54 {
+	eeprom1: eeprom@54 {
 		compatible = "atmel,24c01";
 		reg = <0x54>;
 		pagesize = <8>;
 		status = "okay";
+
+		nvmem-layout {
+			compatible = "fixed-layout";
+			#address-cells = <1>;
+			#size-cells = <1>;
+		};
 	};
 };
 
 &pinctrl {
-	flexcom {
-		pinctrl_flx7_twi_default: flx7-twi-default {
-			atmel,pins =
-				<AT91_PIOC 0 AT91_PERIPH_C AT91_PINCTRL_PULL_UP
-				 AT91_PIOC 1 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>;
-		};
-	};
-
 	gmac {
 		pinctrl_gmac_rmii_default: gmac-rmii-default {
 			atmel,pins =
@@ -85,5 +70,5 @@
 };
 
 &{/} {
-	model = "SAM9X75-Curiosity: Single-port RMII PHY Daughter Card";
+	model = "SAM9X75-Curiosity-Pro: Single-port RMII PHY Daughter Card";
 };

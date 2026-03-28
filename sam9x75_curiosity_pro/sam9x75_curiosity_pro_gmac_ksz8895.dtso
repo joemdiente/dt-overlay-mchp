@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- * Device Tree file for SAM9X75 CURIOSITY board overlay blob supporting the
+ * Device Tree file for SAM9X75 CURIOSITY Pro board overlay blob supporting the
  * KSZ8895 5-port 10/100 switch Daughter Card using SPI and RMII.
  *
- * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
  *
- * Author: Jerry Ray <jerry.ray@microchip.com>
+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
  *
  * Refer to the EV45A66A (KSZ8895-EDS2 daughter card)
  *
@@ -20,11 +20,6 @@
 
 &flx3 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
-	status = "okay";
-};
-
-&flx7 {
-	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
 	status = "okay";
 };
 
@@ -43,22 +38,20 @@
 	};
 };
 
-&i2c7 {
+&i2c6 {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flx7_twi_default>;
-	i2c-analog-filter;
-	i2c-digital-filter;
-	i2c-digital-filter-width-ns = <35>;
-	dmas = <0>, <0>;
-	status = "okay";
-
-	eeprom@54 {
+	eeprom1: eeprom@54 {
 		compatible = "atmel,24c01";
 		reg = <0x54>;
 		pagesize = <8>;
 		status = "okay";
+
+		nvmem-layout {
+			compatible = "fixed-layout";
+			#address-cells = <1>;
+			#size-cells = <1>;
+		};
 	};
 };
 
@@ -70,12 +63,6 @@
 				 AT91_PIOC 23 AT91_PERIPH_B AT91_PINCTRL_NONE
 				 AT91_PIOC 25 AT91_PERIPH_B AT91_PINCTRL_NONE
 				 AT91_PIOC 26 AT91_PERIPH_B AT91_PINCTRL_NONE>;
-		};
-
-		pinctrl_flx7_twi_default: flx7-twi-default {
-			atmel,pins =
-				<AT91_PIOC 0 AT91_PERIPH_C AT91_PINCTRL_NONE
-				 AT91_PIOC 1 AT91_PERIPH_C AT91_PINCTRL_NONE>;
 		};
 	};
 
@@ -171,5 +158,5 @@
 };
 
 &{/} {
-	model = "SAM9X75-Curiosity: KSZ8895 RMII PHY Daughter Card";
+	model = "SAM9X75-Curiosity-Pro: KSZ8895 RMII PHY Daughter Card";
 };

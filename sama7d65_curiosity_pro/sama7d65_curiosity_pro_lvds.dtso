@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
- *  Device Tree overlay for SAMA7D65-CURIOSITY board
+ *  Device Tree overlay for SAMA7D65-CURIOSITY-PRO board
  *  in order to use LVDS displays
  *
- *  Copyright (c) 2024 Microchip Technology Inc. and its subsidiaries
+ *  Copyright (c) 2025 Microchip Technology Inc. and its subsidiaries
  *
- *  Author: Romain Sioen <romain.sioen@microchip.com>
+ *  Author: Ryan Wanner <ryan.wanner@microchip.com>
  *
  */
 /dts-v1/;
@@ -18,7 +18,7 @@
 
 &{/}
 {
-	model = "Microchip SAMA7D65 Curiosity LVDS";
+	model = "Microchip SAMA7D65 Curiosity Pro LVDS";
 
 	backlight: backlight {
 		compatible = "pwm-backlight";
@@ -161,8 +161,4 @@
 			};
 		};
 	};
-};
-
-&gpu {
-	status = "okay";
 };
