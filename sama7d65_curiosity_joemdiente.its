@@ -120,9 +120,9 @@
 			};
 		};
 
-		fdt_gmac_ksz9131 {
-			description = "Device Tree blob for KSZ9131 Gigabit PHY EDS2 overlay";
-			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_ksz9131.dtbo");
+		fdt_gmac_cl22 {
+			description = "Device Tree blob for any clause 22 Gigabit PHY EDS2 overlay";
+			data = /incbin/("./sama7d65_curiosity_joemdiente/sama7d65_curiosity_gmac_cl22.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -355,9 +355,9 @@
 			fdt = "fdt_gmac_lan8840";
 		};
 
-		ksz9131 {
-			description = "FDT overlay blob for KSZ9131";
-			fdt = "fdt_gmac_ksz9131";
+		cl22 {
+			description = "FDT overlay blob for Any Clause 22 PHY";
+			fdt = "fdt_gmac_cl22";
 		};
 
 		ksz9477 {
