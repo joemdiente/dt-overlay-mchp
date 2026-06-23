@@ -83,7 +83,6 @@ sama5d27_wlsom1_ek_dtbos: $(SAMA5D27_WLSOM1_EK_DTBO_OBJECTS)
 
 sama5d3_eds_dtbos: $(SAMA5D3_EDS_DTBO_OBJECTS)
 
-<<<<<<< HEAD
 sama5d29_curiosity_dtbos: $(SAMA5D29_CURIOSITY_DTBO_OBJECTS)
 
 sama5d3_xplained_dtbos: $(SAMA5D3_XPLAINED_DTBO_OBJECTS)
