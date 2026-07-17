@@ -11,6 +11,7 @@
 /plugin/;
 #include <dt-bindings/mfd/atmel-flexcom.h>
 #include <dt-bindings/pinctrl/at91.h>
+#include <dt-bindings/gpio/gpio.h>
 
 &flx3 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
@@ -21,11 +22,12 @@
 		#size-cells = <0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_mikrobus_spi &pinctrl_mikrobus_spi_cs>;
+		cs-gpios = <&pioC 15 GPIO_ACTIVE_LOW>;
 		status = "okay";
 
-		flash@1 {
+		flash@0 {
 			compatible = "atmel,at25ff321a", "jedec,spi-nor";
-			reg = <1>;
+			reg = <0>;
 			#address-cells = <1>;
 			#size-cells = <1>;
 			spi-max-frequency = <2000000>;
@@ -45,7 +47,7 @@
 		};
 
 		pinctrl_mikrobus_spi_cs: mikrobus-spi-cs {
-			atmel,pins = <AT91_PIOC 15 AT91_PERIPH_B AT91_PINCTRL_NONE>;
+			atmel,pins = <AT91_PIOC 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
 		};
 	};
 };
