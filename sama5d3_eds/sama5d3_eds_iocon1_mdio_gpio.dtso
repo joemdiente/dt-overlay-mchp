@@ -47,6 +47,7 @@
 				compatible = "virtual,mdio-gpio";
 				#address-cells = <1>;
 				#size-cells = <0>;
+				pinctrl-0 = <&pinctrl_mdio_gpio2_mdc &pinctrl_mdio_gpio2_mdio>;
 				gpios = <&pioC 17 GPIO_ACTIVE_HIGH>, <&pioC 16 GPIO_ACTIVE_HIGH>; //MDC, MDIO
 				/* https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt */
 			}; 
@@ -56,6 +57,7 @@
 				compatible = "virtual,mdio-gpio";
 				#address-cells = <1>;
 				#size-cells = <0>;
+				pinctrl-0 = <&pinctrl_mdio_gpio3_mdc &pinctrl_mdio_gpio3_mdio>;
 				gpios = <&pioC 19 GPIO_ACTIVE_HIGH>, <&pioC 18 GPIO_ACTIVE_HIGH>; //MDC, MDIO
 				/* https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt */
 			};
@@ -72,26 +74,26 @@
 		__overlay__ {
             board {
                 /* MDIO 2 */
-                mdio-gpio2-mdio {
+                pinctrl_mdio_gpio2_mdio: mdio-gpio2-mdio {
                     atmel,pins =
                         <AT91_PIOC 16 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
                     label = "mdio-gpio2-mdio";
                 };
 
-                mdio-gpio2-mdc {
+                pinctrl_mdio_gpio2_mdc: mdio-gpio2-mdc {
                     atmel,pins =
                         <AT91_PIOC 17 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
                     label = "mdio-gpio2-mdc";
                 };
 
                 /* MDIO 3 */
-                mdio-gpio3-mdio {
+                pinctrl_mdio_gpio3_mdio: mdio-gpio3-mdio {
                     atmel,pins =
                         <AT91_PIOC 18 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
                     label = "mdio-gpio3-mdio";
                 };
 
-                mdio-gpio3-mdc {
+                pinctrl_mdio_gpio3_mdc: mdio-gpio3-mdc {
                     atmel,pins =
                         <AT91_PIOC 19 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
                     label = "mdio-gpio3-mdc";
