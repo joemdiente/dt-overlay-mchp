@@ -19,8 +19,8 @@
   * INT - - MBUS2_INT_PA22 (Pull-up 110k)
   * RX - FLEXCOM5_IO1 - MBUS2_RX/CAN4_RX_PD17 (GPIO - MDIO2)
   * TX - FLEXCOM5_IO0 - MBUS2_TX/CAN4_TX_PD16 (GPIO - MDC2)
-  * SCL - FLEXCOM0_IO1 - MBUS2_TWCK_PC6
-  * SDA - FLEXCOM0_IO0 - MBUS2_TWD_PC7
+  * SCL - FLEXCOM0_IO1 - MBUS2_TWCK_PC6 (GPIO - MDIO3)
+  * SDA - FLEXCOM0_IO0 - MBUS2_TWD_PC7 (GPIO - MDC3)
   */
 
 /dts-v1/;
@@ -41,8 +41,19 @@
 			<&pioa PIN_PD17 GPIO_ACTIVE_HIGH>;	/* MDIO */
 	};
 
+	mdio3: mdio3 {
+		compatible = "virtual,mdio-gpio";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_mdio_gpio3_mdc &pinctrl_mdio_gpio3_mdio>;
+		gpios = <&pioa PIN_PC7 GPIO_ACTIVE_HIGH>,	/* MDC */
+			<&pioa PIN_PC6 GPIO_ACTIVE_HIGH>;	/* MDIO */
+	};
+
 	aliases {
-		mdio-gpio2 = &mdio2;
+		mdio-gpio2 = "/mdio2";
+		mdio-gpio3 = "/mdio3";
 	};
 };
 
@@ -55,6 +66,16 @@
 
 	pinctrl_mdio_gpio2_mdio: mdio-gpio2-mdio {
 		pinmux = <PIN_PD17__GPIO>;
+		bias-pull-up;
+	};
+
+	pinctrl_mdio_gpio3_mdc: mdio-gpio3-mdc {
+		pinmux = <PIN_PC7__GPIO>;
+		bias-disable;
+	};
+
+	pinctrl_mdio_gpio3_mdio: mdio-gpio3-mdio {
+		pinmux = <PIN_PC6__GPIO>;
 		bias-pull-up;
 	};
 };
