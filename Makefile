@@ -5,7 +5,7 @@ DTC_OPTIONS += -Wno-unit_address_vs_reg -Wno-graph_child_address -Wno-pwms_prope
 KERNEL_DIR?=../linux
 KERNEL_BUILD_DIR?=$(shell realpath --relative-to=. $(KERNEL_DIR))
 DTC?=$(KERNEL_BUILD_DIR)/scripts/dtc/dtc
-BDIR?=sam9x60ek sama5d29_curiosity sama5d27_som1_ek sama5d27_wlsom1_ek sama5d2_icp sama5d2_ptc_ek sama5d2_xplained sama5d2_xplained_grts sama5d3_xplained sama5d3_eds sama5d4_xplained sama7d65_curiosity sama7d65_curiosity_pro sama7g5ek sama7g54_curiosity sam9x60_curiosity sam9x75eb mpfs_icicle mpfs_video pic64gx_curiosity_kit
+BDIR?=sam9x60ek sama5d29_curiosity sama5d27_som1_ek sama5d27_wlsom1_ek sama5d2_icp sama5d2_ptc_ek sama5d2_xplained sama5d2_xplained_grts sama5d3_xplained sama5d3_eds sama5d4_xplained sama7d65_curiosity sama7d65_curiosity_pro sama7g5ek sama7g54_curiosity sam9x60_curiosity sam9x60_curiosity_pro sam9x75eb mpfs_icicle mpfs_video pic64gx_curiosity_kit
 
 # workaround to make mkimage use the same dtc as we do
 PATH:=$(shell dirname $(DTC)):$(PATH)
@@ -19,6 +19,7 @@ PIC64GX_CURIOSITY_KIT_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard pic64gx
 RTPFS_DEV_KIT_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard rtpfs_dev_kit/*.dtso))
 SAM9X60EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60ek/*.dtso))
 SAM9X60_CURIOSITY_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60_curiosity/*.dtso))
+SAM9X60_CURIOSITY_PRO_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60_curiosity_pro/*.dtso))
 SAM9X75EB_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75eb/*.dtso))
 SAM9X75_CURIOSITY_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75_curiosity/*.dtso))
 SAM9X75_CURIOSITY_PRO_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75_curiosity_pro/*.dtso))
@@ -63,6 +64,8 @@ rtpfs_dev_kit_dtbos: $(RTPFS_DEV_KIT_DTBO_OBJECTS)
 sam9x60ek_dtbos: $(SAM9X60EK_DTBO_OBJECTS)
 
 sam9x60_curiosity_dtbos: $(SAM9X60_CURIOSITY_DTBO_OBJECTS)
+
+sam9x60_curiosity_pro_dtbos: $(SAM9X60_CURIOSITY_PRO_DTBO_OBJECTS)
 
 sam9x75eb_dtbos: $(SAM9X75EB_DTBO_OBJECTS)
 
