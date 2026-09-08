@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Device Tree file for SAM9X75 Curiosity Pro board overlay blob for enabling CAN1.
+ *
+ * PIOs for CAN1 conflict with Mikroe Bus TX/RX signals. UART will not be
+ * available when CAN1 is being used. Flexcom1 will be disabled.
+ *
+ * Copyright (C) 2026 Microchip Technology, Inc.
+ * Author: Santiago Esteban <santiago.esteban@microchip.com>
+ *
+ */
+
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/pinctrl/at91.h>
+
+&flx1 {
+	status = "disabled";
+};
+
+&can1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_can1>;
+	status = "okay";
+};
+
+&pinctrl {
+	can1 {
+		pinctrl_can1: can1-default {
+			atmel,pins =
+				<AT91_PIOA 28 AT91_PERIPH_B AT91_PINCTRL_NONE>,
+				<AT91_PIOA 29 AT91_PERIPH_B AT91_PINCTRL_NONE>;
+		};
+	};
+};

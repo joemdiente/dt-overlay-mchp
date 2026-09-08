@@ -275,6 +275,18 @@
 				algo = "sha256";
 			};
 		};
+
+		fdt_can1 {
+			description = "Device Tree blob for CAN1 signals";
+			data = /incbin/("./sam9x75_curiosity_pro/sam9x75_curiosity_pro_can1.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x23180000>;
+			hash {
+				algo = "sha256";
+			};
+		};
 	};
 
 	configurations {
@@ -399,6 +411,11 @@
 		wifi_mt320 {
 			description = "FDT overlay blob with MT320 WIFI module";
 			fdt = "fdt_wifi_mt320";
+		};
+
+		can1 {
+			description = "FDT overlay blob for CAN1";
+			fdt = "fdt_can1";
 		};
 	};
 };
