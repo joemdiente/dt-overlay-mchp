@@ -22,11 +22,8 @@
 			compression = "none";
 			load = <0x62000000>;
 			entry = <0x62000000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -37,11 +34,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61000000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -52,11 +46,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61100000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -67,11 +58,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61200000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -82,11 +70,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61300000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -97,11 +82,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61300000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -112,11 +94,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61300000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -127,11 +106,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61400000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -142,11 +118,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -157,11 +130,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -172,11 +142,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -187,11 +154,20 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
+			hash {
+				algo = "sha256";
 			};
-			hash-2 {
-				algo = "sha1";
+		};
+
+		fdt_gmac_ksz9897 {
+			description = "Device Tree blob for KSZ9897 Gigabit switch overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_gmac_ksz9897.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61500000>;
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -202,11 +178,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -217,11 +190,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -232,11 +202,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -247,11 +214,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -262,11 +226,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61500000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -277,11 +238,20 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61600000>;
-			hash-1 {
-				algo = "crc32";
+			hash {
+				algo = "sha256";
 			};
-			hash-2 {
-				algo = "sha1";
+		};
+
+		fdt_mikro_lan8650 {
+			description = "Device Tree blob for LAN8650 MAC-PHY overlay";
+			data = /incbin/("./sama7d65_curiosity/sama7d65_curiosity_mikro_lan8650.dtbo");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			load = <0x61700000>;
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -352,11 +322,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61800000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 
@@ -367,11 +334,8 @@
 			arch = "arm";
 			compression = "none";
 			load = <0x61900000>;
-			hash-1 {
-				algo = "crc32";
-			};
-			hash-2 {
-				algo = "sha1";
+			hash {
+				algo = "sha256";
 			};
 		};
 	};
@@ -450,6 +414,11 @@
 			fdt = "fdt_gmac_ksz9563";
 		};
 
+		ksz9897 {
+			description = "FDT overlay blob for KSZ9897";
+			fdt = "fdt_gmac_ksz9897";
+		};
+
 		ksz8795 {
 			description = "FDT overlay blob for KSZ8795";
 			fdt = "fdt_gmac_ksz8795";
@@ -473,6 +442,11 @@
 		lan8870 {
 			description = "FDT overlay blob for LAN8870";
 			fdt = "fdt_gmac_lan8870";
+		};
+
+		lan8650 {
+			description = "FDT overlay blob for LAN8650";
+			fdt = "fdt_mikro_lan8650";
 		};
 
 		asrc_i2s1_wm8731 {

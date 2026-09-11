@@ -1,0 +1,54 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Device Tree file for SAM9X60 CURIOSITY Pro board overlay blob for the
+ * RMII PHY Daughter Card.
+ *
+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
+ *
+ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
+ *
+ */
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/at91.h>
+
+&macb0 {
+	phy-mode = "rmii";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_macb0_rmii>;
+	magic-packet;
+	status = "okay";
+
+	ethernet-phy@1 {
+		reg = <0x1>;
+		interrupt-parent = <&pioB>;
+		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
+	};
+};
+
+&pinctrl {
+	macb0 {
+		pinctrl_macb0_rmii: macb0-rmii {
+			atmel,pins =
+				<AT91_PIOB 2 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_RXER */
+				<AT91_PIOB 9 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_TX0 */
+				<AT91_PIOB 10 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_TX1 */
+				<AT91_PIOB 0 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_RX0 */
+				<AT91_PIOB 1 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_RX1 */
+				<AT91_PIOB 7 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_TXEN */
+				<AT91_PIOB 3 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_CRSDV */
+				<AT91_PIOB 4 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_REFCLK */
+				<AT91_PIOB 6 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_MDC */
+				<AT91_PIOB 5 AT91_PERIPH_A AT91_PINCTRL_NONE>,	/* E1_MDIO */
+				<AT91_PIOB 8 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;	/* PB8 shared PHY IRQ */
+		};
+	};
+};
+
+&{/} {
+	model = "SAM9X60-Curiosity-Pro: EMAC0 RMII PHY Daughter Card";
+};

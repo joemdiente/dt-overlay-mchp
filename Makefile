@@ -12,12 +12,14 @@ PATH:=$(shell dirname $(DTC)):$(PATH)
 
 AT91SAM9X5EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard at91sam9x5ek/*.dtso))
 MPFS_ICICLE_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_icicle/*.dtso))
-MPFS_ICICLE_AMP_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_icicle_amp/*.dtso))
+MPFS_ICICLE_AMP_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_icicle/*.dtso))
 MPFS_VIDEO_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_video/*.dtso))
 MPFS_DISCOVERY_KIT_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_discovery_kit/*.dtso))
 PIC64GX_CURIOSITY_KIT_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard pic64gx_curiosity_kit/*.dtso))
+RTPFS_DEV_KIT_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard rtpfs_dev_kit/*.dtso))
 SAM9X60EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60ek/*.dtso))
 SAM9X60_CURIOSITY_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60_curiosity/*.dtso))
+SAM9X60_CURIOSITY_PRO_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60_curiosity_pro/*.dtso))
 SAM9X75EB_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75eb/*.dtso))
 SAM9X75_CURIOSITY_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75_curiosity/*.dtso))
 SAM9X75_CURIOSITY_PRO_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x75_curiosity_pro/*.dtso))
@@ -59,9 +61,13 @@ mpfs_discovery_kit_dtbos: $(MPFS_DISCOVERY_KIT_DTBO_OBJECTS)
 
 pic64gx_curiosity_kit_dtbos: $(PIC64GX_CURIOSITY_KIT_DTBO_OBJECTS)
 
+rtpfs_dev_kit_dtbos: $(RTPFS_DEV_KIT_DTBO_OBJECTS)
+
 sam9x60ek_dtbos: $(SAM9X60EK_DTBO_OBJECTS)
 
 sam9x60_curiosity_dtbos: $(SAM9X60_CURIOSITY_DTBO_OBJECTS)
+
+sam9x60_curiosity_pro_dtbos: $(SAM9X60_CURIOSITY_PRO_DTBO_OBJECTS)
 
 sam9x75eb_dtbos: $(SAM9X75EB_DTBO_OBJECTS)
 

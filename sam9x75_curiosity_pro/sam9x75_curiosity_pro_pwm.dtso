@@ -11,18 +11,26 @@
 /plugin/;
 #include "dt-bindings/pinctrl/at91.h"
 
+&led_blue {
+	status = "disabled"; /* Conflict between PWM0_2 and Blue LED */
+};
+
 &led_green {
-	status = "disabled"; /* Conflict between Mikrobus PWM and Green LED */
+	status = "disabled"; /* Conflict between PWM0_3 and Green LED */
 };
 
 &pwm0 {
         pinctrl-names = "default";
-        pinctrl-0 = <&pinctrl_pwm0_3>;
+        pinctrl-0 = <&pinctrl_pwm0_2 &pinctrl_pwm0_3>;
         status = "okay";
 };
 
 &pinctrl {
 	pwm0 {
+		pinctrl_pwm0_2: pwm0-2 {
+			atmel,pins = <AT91_PIOC 20 AT91_PERIPH_C AT91_PINCTRL_NONE>;
+		};
+
 		pinctrl_pwm0_3: pwm0-3 {
 			atmel,pins = <AT91_PIOC 21 AT91_PERIPH_C AT91_PINCTRL_NONE>;
 		};
